@@ -10,6 +10,8 @@ const GlobalStyles = createGlobalStyle`
   body {
     background: url("/img/Background.png");
   background-size: 100vw 100vh ; 
+  overflow-y: hidden;
+
   }
 `;
 
