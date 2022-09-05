@@ -57,16 +57,15 @@ export const InputBtn = styled.button`
   cursor: pointer;
 `;
 export const InputSection = styled.div`
-  /* display: flex; */
-  display: none;
+  display: flex;
+  /* display: none; */
   flex-direction: column;
 
   & input {
     width: 98%;
     height: 6vh;
-    border-radius: 5px;
+    border: none;
     padding-left: 10px;
-    border: 1px solid #a5a1a1;
 
     font-family: "Work Sans";
     font-size: 1.5rem;
