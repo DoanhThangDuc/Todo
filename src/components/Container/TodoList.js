@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { FaRegCommentAlt } from "react-icons/fa";
 import { AiOutlinePlus } from "react-icons/ai";
 import { BsCheck2All } from "react-icons/bs";
@@ -12,22 +11,12 @@ import {
   InputSection,
   MonitorBtn,
 } from "./TodoList.styled";
+
 function TodoList() {
   return (
     <StyledTodoList>
       <StyledList>
         <HeadContent>Check List</HeadContent>
-        <InputBtn>
-          <AiOutlinePlus color="Red" style={{ paddingRight: "20px" }} />
-          Add todolist
-        </InputBtn>
-        <InputSection>
-          <input placeholder="Input check list..." />
-          <MonitorBtn>
-            <button>Add</button>
-            <button>Close</button>
-          </MonitorBtn>
-        </InputSection>
         <ul>
           <Content>
             <Icons>
@@ -45,6 +34,17 @@ function TodoList() {
             <p>Content 1</p>
           </Content>
         </ul>
+        <InputBtn>
+          <AiOutlinePlus color="Red" style={{ paddingRight: "20px" }} />
+          Add todolist
+        </InputBtn>
+        <InputSection>
+          <input placeholder="Input check list..." />
+          <MonitorBtn>
+            <button>Add</button>
+            <button>Close</button>
+          </MonitorBtn>
+        </InputSection>
       </StyledList>
     </StyledTodoList>
   );

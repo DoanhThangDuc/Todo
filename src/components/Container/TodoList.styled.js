@@ -33,6 +33,7 @@ export const HeadContent = styled.p`
 `;
 export const Content = styled.li`
   display: inline-flex;
+  /* display: none; */
   padding: 1rem 0 0 6rem;
   color: #434141;
   font-family: "Work Sans";
