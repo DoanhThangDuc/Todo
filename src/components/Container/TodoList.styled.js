@@ -50,8 +50,8 @@ export const Icons = styled.div`
   cursor: pointer;
 `;
 export const InputBtn = styled.button`
-  /* display: flex; */
-  display: none;
+  display: flex;
+  /* display: none; */
   justify-content: left;
   padding: 20px 0 20px 30px;
   background-color: inherit;
@@ -60,8 +60,9 @@ export const InputBtn = styled.button`
   cursor: pointer;
 `;
 export const InputSection = styled.div`
-  /* display: flex; */
-  display: none;
+  display: flex;
+  /* display: none; */
+  display: ${(props) => (props.isInputExpand ? "flex" : "none")};
   flex-direction: column;
 
   & input {

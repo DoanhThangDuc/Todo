@@ -1,4 +1,4 @@
-import { SET_TODO_INPUT, CREATE_TODO_INPUT } from "./constants";
+import { SET_TODO_INPUT, CREATE_TODO_INPUT, OPEN_TODO_INPUT } from "./constants";
 
 const initialState = {
   todoInput: "",
@@ -18,6 +18,11 @@ function reducer(state, action) {
         ...state,
         todos: [...state.todos, action.payload],
       };
+    case OPEN_TODO_INPUT:
+      return {
+        ...state,
+        isInputExpand: action.payload,
+      }
   }
 }
 

@@ -4,7 +4,7 @@ import { FiMessageSquare } from "react-icons/fi";
 import { AiOutlinePlus } from "react-icons/ai";
 import { AiOutlineCheck } from "react-icons/ai";
 import { FaTimes } from "react-icons/fa";
-import { setTodoInput, createTodos } from "./store/actions";
+import { setTodoInput, createTodos, openTodoInput } from "./store/actions";
 import {
   StyledTodoList,
   StyledList,
@@ -24,6 +24,9 @@ function TodoList() {
     dispatch(createTodos(todoInput));
     dispatch(setTodoInput(""));
     nameRef.current.focus();
+  };
+  const handleCloseInput = () => {
+    dispatch(openTodoInput(false));
   };
   const nameRef = useRef();
   return (
@@ -54,7 +57,7 @@ function TodoList() {
             );
           })}
 
-          <Content>
+          {/* <Content>
             <Icons>
               <FiMessageSquare
                 size="2.5rem"
@@ -76,7 +79,6 @@ function TodoList() {
             </Icons>
             <p>Lorem ipsum dolor sit amet</p>
           </Content>
-
           <Content background="yellow">
             <Icons>
             <FiMessageSquare
@@ -207,14 +209,19 @@ function TodoList() {
               />
             </Icons>
             <p>Lorem ipsum dolor sit amet</p>
-          </Content>
-
+          </Content> */}
         </ul>
-        <InputBtn>
-          <AiOutlinePlus color="Red" style={{ paddingRight: "20px" }} />
-          Add todolist
-        </InputBtn>
-        <InputSection>
+        {isInputExpand || (
+          <InputBtn
+            onClick={() => {
+              dispatch(openTodoInput(!isInputExpand));
+            }}
+          >
+            <AiOutlinePlus color="Red" style={{ paddingRight: "20px" }} />
+            Add todolist
+          </InputBtn>
+        )}
+        <InputSection isInputExpand={isInputExpand}>
           <input
             value={todoInput}
             ref={nameRef}
@@ -226,7 +233,7 @@ function TodoList() {
 
           <MonitorBtn>
             <button onClick={handleSubmit}>Add</button>
-            <button>Close</button>
+            <button onClick={handleCloseInput}>Close</button>
           </MonitorBtn>
         </InputSection>
       </StyledList>
