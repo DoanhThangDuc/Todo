@@ -1,8 +1,9 @@
 import { useContext, useRef } from "react";
 import Context from "./store/Context";
-import { FaRegCommentAlt } from "react-icons/fa";
+import { FiMessageSquare } from "react-icons/fi";
 import { AiOutlinePlus } from "react-icons/ai";
-import { BsCheck2All } from "react-icons/bs";
+import { AiOutlineCheck } from "react-icons/ai";
+import { FaTimes } from "react-icons/fa";
 import { setTodoInput, createTodos } from "./store/actions";
 import {
   StyledTodoList,
@@ -34,21 +35,180 @@ function TodoList() {
             return (
               <Content key={index}>
                 <Icons>
-                  <FaRegCommentAlt />
-                  <BsCheck2All
+                  <FiMessageSquare
+                    size="2rem"
+                    style={{ transform: "scaleX(-1)", color: "#756f6f" }}
+                  />
+                  <AiOutlineCheck
                     size="3rem"
                     style={{
                       position: "absolute",
                       marginLeft: "-35px",
-                      marginTop: "-20px",
+                      marginTop: "-17px",
                     }}
-                    color="red"
+                    color="#4e4949"
                   />
                 </Icons>
                 <p>{todo}</p>
               </Content>
             );
           })}
+
+          <Content>
+            <Icons>
+              <FiMessageSquare
+                size="2.5rem"
+                style={{
+                  transform: "scaleX(-1)",
+                  color: "#3d3a3a",
+                  
+                }}
+              />
+              <AiOutlineCheck
+                size="3rem"
+                style={{
+                  position: "absolute",
+                  marginLeft: "-40px",
+                  marginTop: "-12px",
+                }}
+                color="#4e4949"
+              />
+            </Icons>
+            <p>Lorem ipsum dolor sit amet</p>
+          </Content>
+
+          <Content background="yellow">
+            <Icons>
+            <FiMessageSquare
+                size="2.5rem"
+                style={{
+                  transform: "scaleX(-1)",
+                  color: "#3d3a3a",
+                  
+                }}
+              />
+              <FaTimes
+                size="2rem"
+                style={{
+                  position: "absolute",
+                  marginLeft: "-35px",
+                }}
+                color="#d73636"
+              />
+            </Icons>
+            <p>Lorem ipsum dolor sit amet</p>
+          </Content>
+          <Content background="#6868eb">
+            <Icons>
+              <FiMessageSquare
+                size="2.5rem"
+                style={{
+                  transform: "scaleX(-1)",
+                  color: "#3d3a3a",
+                  
+                }}
+              />
+              <AiOutlineCheck
+                size="3rem"
+                style={{
+                  position: "absolute",
+                  marginLeft: "-40px",
+                  marginTop: "-12px",
+                }}
+                color="#4e4949"
+              />
+            </Icons>
+            <p>Lorem ipsum dolor sit amet</p>
+          </Content>
+          <Content>
+            <Icons>
+              <FiMessageSquare
+                size="2.5rem"
+                style={{
+                  transform: "scaleX(-1)",
+                  color: "#3d3a3a",
+                  
+                }}
+              />
+              <AiOutlineCheck
+                size="3rem"
+                style={{
+                  position: "absolute",
+                  marginLeft: "-40px",
+                  marginTop: "-12px",
+                }}
+                color="#4e4949"
+              />
+            </Icons>
+            <p>Lorem ipsum dolor sit amet</p>
+          </Content>
+          <Content>
+            <Icons>
+              <FiMessageSquare
+                size="2.5rem"
+                style={{
+                  transform: "scaleX(-1)",
+                  color: "#3d3a3a",
+                  
+                }}
+              />
+              <AiOutlineCheck
+                size="3rem"
+                style={{
+                  position: "absolute",
+                  marginLeft: "-40px",
+                  marginTop: "-12px",
+                }}
+                color="#4e4949"
+              />
+            </Icons>
+            <p>Lorem ipsum dolor sit amet</p>
+          </Content>
+          <Content>
+            <Icons>
+              <FiMessageSquare
+                size="2.5rem"
+                style={{
+                  transform: "scaleX(-1)",
+                  color: "#3d3a3a",
+                  
+                }}
+              />
+              <AiOutlineCheck
+                size="3rem"
+                style={{
+                  position: "absolute",
+                  marginLeft: "-40px",
+                  marginTop: "-12px",
+                }}
+                color="#4e4949"
+              />
+            </Icons>
+            <p>Lorem ipsum dolor sit amet</p>
+          </Content>
+          <Content>
+            <Icons>
+              <FiMessageSquare
+                size="2.5rem"
+                style={{
+                  transform: "scaleX(-1)",
+                  color: "#3d3a3a",
+                  
+                }}
+              />
+              <AiOutlineCheck
+                size="3rem"
+                style={{
+                  position: "absolute",
+                  marginLeft: "-40px",
+                  marginTop: "-12px",
+                }}
+                color="#4e4949"
+              />
+            </Icons>
+            <p>Lorem ipsum dolor sit amet</p>
+          </Content>
+
         </ul>
         <InputBtn>
           <AiOutlinePlus color="Red" style={{ paddingRight: "20px" }} />
@@ -66,7 +226,7 @@ function TodoList() {
 
           <MonitorBtn>
             <button onClick={handleSubmit}>Add</button>
-            <button >Close</button>
+            <button>Close</button>
           </MonitorBtn>
         </InputSection>
       </StyledList>

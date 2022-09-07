@@ -34,13 +34,16 @@ export const HeadContent = styled.p`
 export const Content = styled.li`
   display: inline-flex;
   /* display: none; */
-  padding: 1rem 0 0 6rem;
+  padding: 1rem 0 0 3rem;
   color: #434141;
   font-family: "Work Sans";
-  font-style: italic;
+  font-weight: 600;
+  color: #615b5b;
+  /* font-style: italic; */
   font-size: 1.5rem;
   & p {
-    padding-left: 10px;
+    background-color: ${(props) => props.background || "inherit"};
+    padding-left: 50px;
   }
 `;
 export const Icons = styled.div`
@@ -57,8 +60,8 @@ export const InputBtn = styled.button`
   cursor: pointer;
 `;
 export const InputSection = styled.div`
-  display: flex;
-  /* display: none; */
+  /* display: flex; */
+  display: none;
   flex-direction: column;
 
   & input {
