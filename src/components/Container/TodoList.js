@@ -19,16 +19,19 @@ import {
 function TodoList() {
   const [state, dispatch] = useContext(Context);
   const { todoInput, todos, isInputExpand } = state;
-  console.log(isInputExpand);
+  const inputRef = useRef();
+  const addBtnRef = useRef();
+  const closeBtnRef = useRef();
+
   const handleSubmit = () => {
     dispatch(createTodos(todoInput));
     dispatch(setTodoInput(""));
-    nameRef.current.focus();
+    inputRef.current.focus();
   };
   const handleCloseInput = () => {
     dispatch(openTodoInput(false));
   };
-  const nameRef = useRef();
+
   return (
     <StyledTodoList>
       <StyledList>
@@ -224,7 +227,7 @@ function TodoList() {
         <InputSection isInputExpand={isInputExpand}>
           <input
             value={todoInput}
-            ref={nameRef}
+            ref={inputRef}
             onChange={(e) => {
               dispatch(setTodoInput(e.target.value));
             }}
@@ -232,8 +235,12 @@ function TodoList() {
           />
 
           <MonitorBtn>
-            <button onClick={handleSubmit}>Add</button>
-            <button onClick={handleCloseInput}>Close</button>
+            <button ref={addBtnRef} onClick={handleSubmit}>
+              Add
+            </button>
+            <button ref={closeBtnRef} onClick={handleCloseInput}>
+              Close
+            </button>
           </MonitorBtn>
         </InputSection>
       </StyledList>

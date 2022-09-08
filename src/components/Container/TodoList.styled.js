@@ -90,10 +90,22 @@ export const MonitorBtn = styled.div`
     margin-right: 3px;
     width: 4rem;
   }
+  & button:first-child {
+    background-color: #66aa53;
+    border: none;
+    color: #fff;
+    font-weight: bold;  
+  }
   & button:first-child:hover {
-    color: #528d41;
+    color: yellow;
+  }
+  & button:nth-child(2) {
+    background-color: #e82626;
+    border: none;
+    color: #fff;
+    font-weight: bold;  
   }
   & button:nth-child(2):hover {
-    color: red;
+    color: black;
   }
 `;
