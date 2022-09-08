@@ -1,5 +1,5 @@
-import TodoList from "./TodoList";
-import Logo from './Logo/Logo'
+import TodoList from "../TodoList/TodoList";
+import Logo from '../Logo/Logo'
 import { StyledTodo } from "./Todo.styled";
 
 function Todo() {

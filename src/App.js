@@ -1,4 +1,4 @@
-import { TodoApp } from "./components";
+import Todo from "./components/Todo/Todo";
 import GlobalStyles from "./components/Global.styled";
 import { ThemeProvider } from "styled-components";
 const theme = {
@@ -11,12 +11,11 @@ const theme = {
   tablet: "63.9375em",
 };
 
-
 function App() {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyles></GlobalStyles>
-      <TodoApp></TodoApp>;
+      <Todo></Todo>;
     </ThemeProvider>
   );
 }
