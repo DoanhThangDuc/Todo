@@ -1,8 +1,8 @@
 import TodoList from "../TodoList/TodoList";
 import Logo from '../Logo/Logo'
-import { StyledTodo } from "./Todo.styled";
+import { StyledTodo } from "./TodoBoard.styled";
 
-function Todo() {
+function TodoBoard() {
   return (
     <StyledTodo>
       <Logo></Logo>
@@ -11,4 +11,4 @@ function Todo() {
   );
 }
 
-export default Todo;
+export default TodoBoard;

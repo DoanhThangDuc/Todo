@@ -1,4 +1,4 @@
-import Todo from "./components/Todo/Todo";
+import TodoBoard from "./components/Todo/TodoBoard";
 import GlobalStyles from "./components/Global.styled";
 import { ThemeProvider } from "styled-components";
 const theme = {
@@ -15,7 +15,7 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyles></GlobalStyles>
-      <Todo></Todo>;
+      <TodoBoard></TodoBoard>;
     </ThemeProvider>
   );
 }

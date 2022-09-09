@@ -16,11 +16,13 @@ export const StyledList = styled.div`
   li {
     list-style: none;
   }
-  & ul {
-    display: flex;
-    flex-direction: column;
-  }
-`;
+  
+  `;
+export const TodoContainer = styled.ul`
+display: flex;
+flex-direction: column;
+
+`
 export const HeadContent = styled.p`
   padding: 0 0 1rem 6rem;
   color: #434141;
