@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState } from "react";
 import TodoItem from "../TodoItem/TodoItem";
 import InputSection from "../InputSection/InputSection";
 import {
@@ -9,7 +9,6 @@ import {
 } from "./TodoList.styled";
 
 function TodoList() {
-  let content = "Lorem ipsum dolor sit amet";
   const [todoInput, setTodoInput] = useState("");
   const [list, setList] = useState([]);
   return (

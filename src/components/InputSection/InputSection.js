@@ -9,13 +9,14 @@ function InputSection({ onSetTodoInput, onSetList, todoInput, list }) {
     onSetTodoInput("");
     inputRef.current.focus();
   };
-  const handleKeyPress = (e) => {
-    if (e.which === 13 || e.key === "Enter") {
-      handleSubmit();
-    }
+
+  const onFormSubmit = (e) => {
+    e.preventDefault();
+    handleSubmit();
   };
+
   return (
-    <StyledInputSection onKeyDown={handleKeyPress}>
+    <StyledInputSection onSubmit={onFormSubmit}>
       <input
         ref={inputRef}
         value={todoInput}
@@ -25,7 +26,7 @@ function InputSection({ onSetTodoInput, onSetList, todoInput, list }) {
         }}
       />
       <MonitorBtn>
-        <button onClick={handleSubmit}>Add</button>
+        <button onClick={() => handleSubmit}>Add</button>
         <button>Close</button>
       </MonitorBtn>
     </StyledInputSection>
