@@ -20,7 +20,7 @@ function TodoList() {
           {/* checkStatus: checked, unchecked, crossed. */}
           {/* background, content*/}
           {list.map((item) => {
-            return <TodoItem content={item}></TodoItem>;
+            return <TodoItem key={item.toString()} content={item}></TodoItem>;
           })}
         </TodoContainer>
         <InputSection

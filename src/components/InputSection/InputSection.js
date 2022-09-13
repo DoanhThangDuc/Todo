@@ -2,16 +2,22 @@ import { useRef } from "react";
 import { StyledInputSection, MonitorBtn } from "./InputSection.styled";
 
 function InputSection({ onSetTodoInput, onSetList, todoInput, list }) {
-  const inputClick = useRef();
+  const inputRef = useRef();
+
   const handleSubmit = () => {
     onSetList([...list, todoInput]);
     onSetTodoInput("");
-    inputClick.current.focus();
+    inputRef.current.focus();
+  };
+  const handleKeyPress = (e) => {
+    if (e.which === 13 || e.key === "Enter") {
+      handleSubmit();
+    }
   };
   return (
-    <StyledInputSection>
+    <StyledInputSection onKeyDown={handleKeyPress}>
       <input
-        ref={inputClick}
+        ref={inputRef}
         value={todoInput}
         placeholder="enter task"
         onChange={(e) => {
