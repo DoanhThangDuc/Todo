@@ -1,50 +1,26 @@
-import { useState } from "react";
-import { FaRegCommentAlt } from "react-icons/fa";
-import { AiOutlinePlus } from "react-icons/ai";
-import { BsCheck2All } from "react-icons/bs";
+import TodoItem from "../TodoItem/TodoItem";
 import {
   StyledTodoList,
+  TodoContainer,
   StyledList,
   HeadContent,
-  Content,
-  Icons,
-  InputBtn,
-  InputSection,
-  MonitorBtn,
 } from "./TodoList.styled";
+
 function TodoList() {
+  let content = "Lorem ipsum dolor sit amet";
   return (
     <StyledTodoList>
       <StyledList>
         <HeadContent>Check List</HeadContent>
-        <InputBtn>
-          <AiOutlinePlus color="Red" style={{ paddingRight: "20px" }} />
-          Add todolist
-        </InputBtn>
-        <InputSection>
-          <input placeholder="Input check list..." />
-          <MonitorBtn>
-            <button>Add</button>
-            <button>Close</button>
-          </MonitorBtn>
-        </InputSection>
-        <ul>
-          <Content>
-            <Icons>
-              <FaRegCommentAlt />
-              <BsCheck2All
-                size="3rem"
-                style={{
-                  position: "absolute",
-                  marginLeft: "-35px",
-                  marginTop: "-20px",
-                }}
-                color="red"
-              />
-            </Icons>
-            <p>Content 1</p>
-          </Content>
-        </ul>
+        <TodoContainer>
+          <TodoItem checkStatus="checked" content={content}></TodoItem>
+          <TodoItem checkStatus="checked" content={content}></TodoItem>
+          <TodoItem background={"yellow"} content={content}></TodoItem>
+          <TodoItem content={content}></TodoItem>
+          <TodoItem checkStatus="crossed" content={content}></TodoItem>
+          <TodoItem background={"#6868eb"} content={content}></TodoItem>
+          <TodoItem content={content}></TodoItem>
+        </TodoContainer>
       </StyledList>
     </StyledTodoList>
   );

@@ -16,11 +16,13 @@ export const StyledList = styled.div`
   li {
     list-style: none;
   }
-  & ul {
-    display: flex;
-    flex-direction: column;
-  }
-`;
+  
+  `;
+export const TodoContainer = styled.ul`
+display: flex;
+flex-direction: column;
+
+`
 export const HeadContent = styled.p`
   padding: 0 0 1rem 6rem;
   color: #434141;
@@ -31,20 +33,8 @@ export const HeadContent = styled.p`
   text-decoration: underline 3px;
   text-underline-offset: 5px;
 `;
-export const Content = styled.li`
-  display: inline-flex;
-  padding: 1rem 0 0 6rem;
-  color: #434141;
-  font-family: "Work Sans";
-  font-style: italic;
-  font-size: 1.5rem;
-  & p {
-    padding-left: 10px;
-  }
-`;
-export const Icons = styled.div`
-  cursor: pointer;
-`;
+
+
 export const InputBtn = styled.button`
   /* display: flex; */
   display: none;
@@ -63,9 +53,8 @@ export const InputSection = styled.div`
   & input {
     width: 98%;
     height: 6vh;
-    border-radius: 5px;
+    border: none;
     padding-left: 10px;
-    border: 1px solid #a5a1a1;
 
     font-family: "Work Sans";
     font-size: 1.5rem;
