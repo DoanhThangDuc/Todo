@@ -1,4 +1,5 @@
 import TodoItem from "../TodoItem/TodoItem";
+import InputSection from "../InputSection/InputSection";
 import {
   StyledTodoList,
   TodoContainer,
@@ -16,11 +17,8 @@ function TodoList() {
           <TodoItem checkStatus="checked" content={content}></TodoItem>
           <TodoItem checkStatus="checked" content={content}></TodoItem>
           <TodoItem background={"yellow"} content={content}></TodoItem>
-          <TodoItem content={content}></TodoItem>
-          <TodoItem checkStatus="crossed" content={content}></TodoItem>
-          <TodoItem background={"#6868eb"} content={content}></TodoItem>
-          <TodoItem content={content}></TodoItem>
         </TodoContainer>
+        <InputSection></InputSection>
       </StyledList>
     </StyledTodoList>
   );
