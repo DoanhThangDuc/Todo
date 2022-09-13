@@ -6,15 +6,15 @@ import {
   CheckIcon,
 } from "./TodoCheckbox.styled";
 
-function TodoCheckbox({ check, unCheck }) {
+function TodoCheckbox({ checkStatus }) {
   return (
     <IconContain>
-      {check && (
+      {checkStatus === "checked" && (
         <CheckIcon>
           <TickIcon size="3rem"></TickIcon>
         </CheckIcon>
       )}
-      {unCheck && (
+      {checkStatus === "crossed" && (
         <DeleteIcon>
           <ClearIcon size="2rem"></ClearIcon>
         </DeleteIcon>

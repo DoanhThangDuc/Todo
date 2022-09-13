@@ -2,7 +2,7 @@ import { FiMessageSquare } from "react-icons/fi";
 import { Item, Icons, Content } from "./TodoItem.styled";
 import TodoCheckbox from "../TodoCheckbox/TodoCheckbox";
 
-function TodoItem({ background, check, unCheck }) {
+function TodoItem({ background, checkStatus, content }) {
   return (
     <Item>
       <Icons>
@@ -13,9 +13,9 @@ function TodoItem({ background, check, unCheck }) {
             color: "#3d3a3a",
           }}
         />
-        <TodoCheckbox check={check} unCheck={unCheck}></TodoCheckbox>
+        <TodoCheckbox checkStatus={checkStatus}></TodoCheckbox>
       </Icons>
-      <Content background={background}>Lorem ipsum dolor sit amet</Content>
+      <Content background={background}>{content}</Content>
     </Item>
   );
 }
