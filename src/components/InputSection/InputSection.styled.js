@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const StyledInputSection = styled.div`
+export const StyledInputSection = styled.form`
   display: flex;
   flex-direction: column;
   padding-top: 20px;

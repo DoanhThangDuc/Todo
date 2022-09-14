@@ -1,3 +1,4 @@
+import { useState } from "react";
 import TodoItem from "../TodoItem/TodoItem";
 import InputSection from "../InputSection/InputSection";
 import {
@@ -8,17 +9,25 @@ import {
 } from "./TodoList.styled";
 
 function TodoList() {
-  let content = "Lorem ipsum dolor sit amet";
+  const [todoInput, setTodoInput] = useState("");
+  const [list, setList] = useState([]);
   return (
     <StyledTodoList>
       <StyledList>
         <HeadContent>Check List</HeadContent>
         <TodoContainer>
-          <TodoItem checkStatus="checked" content={content}></TodoItem>
-          <TodoItem checkStatus="checked" content={content}></TodoItem>
-          <TodoItem background={"yellow"} content={content}></TodoItem>
+          {/* checkStatus: checked, unchecked, crossed. */}
+          {/* background, content*/}
+          {list.map((item) => {
+            return <TodoItem key={item.toString()} content={item}></TodoItem>;
+          })}
         </TodoContainer>
-        <InputSection></InputSection>
+        <InputSection
+          onSetTodoInput={setTodoInput}
+          onSetList={setList}
+          todoInput={todoInput}
+          list={list}
+        ></InputSection>
       </StyledList>
     </StyledTodoList>
   );
