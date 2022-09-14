@@ -4,15 +4,11 @@ import { StyledInputSection, MonitorBtn } from "./InputSection.styled";
 function InputSection({ onSetTodoInput, onSetList, todoInput, list }) {
   const inputRef = useRef();
 
-  const handleSubmit = () => {
+  const onFormSubmit = (e) => {
+    e.preventDefault();
     onSetList([...list, todoInput]);
     onSetTodoInput("");
     inputRef.current.focus();
-  };
-
-  const onFormSubmit = (e) => {
-    e.preventDefault();
-    handleSubmit();
   };
 
   return (
