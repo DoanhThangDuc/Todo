@@ -1,23 +1,23 @@
 import {
   TickIcon,
-  DeleteIcon,
+  CrossIconContainer,
   IconContain,
-  ClearIcon,
-  CheckIcon,
+  CrossIcon,
+  TickIconContainer,
 } from "./TodoCheckbox.styled";
 
 function TodoCheckbox({ checkStatus }) {
   return (
     <IconContain>
       {checkStatus === "checked" && (
-        <CheckIcon>
+        <TickIconContainer>
           <TickIcon size="3rem"></TickIcon>
-        </CheckIcon>
+        </TickIconContainer>
       )}
       {checkStatus === "crossed" && (
-        <DeleteIcon>
-          <ClearIcon size="2rem"></ClearIcon>
-        </DeleteIcon>
+        <CrossIconContainer>
+          <CrossIcon size="2rem"></CrossIcon>
+        </CrossIconContainer>
       )}
     </IconContain>
   );
