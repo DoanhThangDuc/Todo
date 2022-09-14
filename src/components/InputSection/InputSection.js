@@ -26,7 +26,7 @@ function InputSection({ onSetTodoInput, onSetList, todoInput, list }) {
         }}
       />
       <MonitorBtn>
-        <button onClick={() => handleSubmit}>Add</button>
+        <button>Add</button>
         <button>Close</button>
       </MonitorBtn>
     </StyledInputSection>
