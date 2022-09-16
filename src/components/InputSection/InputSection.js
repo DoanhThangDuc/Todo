@@ -1,16 +1,31 @@
 import { useRef } from "react";
 import { StyledInputSection, MonitorBtn } from "./InputSection.styled";
 
-function InputSection({ onSetTodoInput, onSetList, todoInput, list }) {
+function InputSection({ state, setState }) {
   const inputRef = useRef();
+  const { todoInput, todoItem, filter } = state;
 
   const onFormSubmit = (e) => {
     e.preventDefault();
-    onSetList([...list, todoInput]);
-    onSetTodoInput("");
+    setState(setTodoItem(todoInput));
     inputRef.current.focus();
   };
+  const setTodoInput = (payload) => {
+    return { ...state, todoInput: payload };
+  };
 
+  const setTodoItem = (payload) => {
+    let newItem = {
+      content: payload,
+      id: todoItem.length,
+      status: "unchecked",
+    };
+    return {
+      ...state,
+      todoInput: "",
+      todoItem: [...todoItem, newItem],
+    };
+  };
   return (
     <StyledInputSection onSubmit={onFormSubmit}>
       <input
@@ -18,7 +33,7 @@ function InputSection({ onSetTodoInput, onSetList, todoInput, list }) {
         value={todoInput}
         placeholder="enter task"
         onChange={(e) => {
-          onSetTodoInput(e.target.value);
+          setState(setTodoInput(e.target.value));
         }}
       />
       <MonitorBtn>

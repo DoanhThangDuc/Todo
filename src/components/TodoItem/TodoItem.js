@@ -1,29 +1,36 @@
-import { useState } from "react";
+import { useState, useCallback, memo } from "react";
 import { Item, Icons, Content, ChatIcon } from "./TodoItem.styled";
 import TodoCheckbox from "../TodoCheckbox/TodoCheckbox";
 
-function TodoItem({ content }) {
-  const checkboard = ["unchecked", "checked", "crossed"];
-  const [checkStatus, setCheckStatus] = useState("unchecked");
+function TodoItem({ content, item, state, setState }) {
+  const { todoInput, todoItem, filter } = state;
+
   const handleCheckStatus = () => {
-    switch (checkStatus) {
+    switch (item.status) {
       case "unchecked":
-        return setCheckStatus("checked");
+        item.status = "checked";
+        setState({ ...state, todoItem: todoItem });
+        break;
       case "checked":
-        return setCheckStatus("crossed");
+        item.status = "crossed";
+        setState({ ...state, todoItem: todoItem });
+        break;
       case "crossed":
-        return setCheckStatus("unchecked");
+        item.status = "unchecked";
+        setState({ ...state, todoItem: todoItem });
+        break;
     }
   };
+
   return (
     <Item>
       <Icons onClick={handleCheckStatus}>
-        <ChatIcon size="2.5rem"  />
-        <TodoCheckbox checkStatus={checkStatus}></TodoCheckbox>
+        <ChatIcon size="2.5rem" />
+        <TodoCheckbox checkStatus={item.status}></TodoCheckbox>
       </Icons>
       <Content>{content}</Content>
     </Item>
   );
 }
 
-export default TodoItem;
+export default memo(TodoItem);
