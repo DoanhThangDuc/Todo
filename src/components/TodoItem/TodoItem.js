@@ -3,7 +3,7 @@ import { Item, Icons, Content, ChatIcon } from "./TodoItem.styled";
 import TodoCheckbox from "../TodoCheckbox/TodoCheckbox";
 
 function TodoItem({ content, item, state, setState }) {
-  const { todoInput, todoItem, filter } = state;
+  const { todoItem, filter } = state;
 
   const handleCheckStatus = () => {
     switch (item.status) {

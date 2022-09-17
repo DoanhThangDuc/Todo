@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState } from "react";
 import TodoItem from "../TodoItem/TodoItem";
 import InputSection from "../InputSection/InputSection";
 import {
@@ -11,12 +11,12 @@ import {
 
 function TodoList() {
   const initialState = {
-    todoInput: "",
     todoItem: [],
     filter: "all",
   };
+
   const [state, setState] = useState(initialState);
-  const { todoInput, todoItem, filter } = state;
+  const {  todoItem, filter } = state;
 
   const handleFilter = (status) => {
     switch (status) {
@@ -28,6 +28,15 @@ function TodoList() {
         return todoItem.filter((item) => item.status === "crossed");
     }
   };
+
+  const getNextId = (todoInput) => {
+    return todoInput.toString();
+  };
+  const createTodoItem = (itemValue) => {
+    setState({ ...state, todoItem: [...todoItem, itemValue] });
+  };
+
+
   return (
     <StyledTodoList>
       <StyledList>
@@ -45,7 +54,10 @@ function TodoList() {
             );
           })}
         </TodoContainer>
-        <InputSection state={state} setState={setState}></InputSection>
+        <InputSection
+          getNextId={getNextId}
+          createTodoItem={createTodoItem}
+        ></InputSection>
         <StyleFilterPanel>
           <h2>Show:</h2>
           <button onClick={() => setState({ ...state, filter: "all" })}>

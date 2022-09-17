@@ -1,39 +1,33 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { StyledInputSection, MonitorBtn } from "./InputSection.styled";
 
-function InputSection({ state, setState }) {
+function InputSection({ getNextId, createTodoItem }) {
+  const [todoInput, setTodoInput] = useState('')
   const inputRef = useRef();
-  const { todoInput, todoItem, filter } = state;
 
-  const onFormSubmit = (e) => {
+  const setTodoItem = (todoInput) => {
+    return {
+      content: todoInput,
+      status: "unchecked",
+      id: getNextId(todoInput)
+    };
+  };
+
+  const handleFormSubmit = (e) => {
     e.preventDefault();
-    setState(setTodoItem(todoInput));
+    createTodoItem(setTodoItem(todoInput));
+    setTodoInput('');
     inputRef.current.focus();
   };
-  const setTodoInput = (payload) => {
-    return { ...state, todoInput: payload };
-  };
 
-  const setTodoItem = (payload) => {
-    let newItem = {
-      content: payload,
-      id: todoItem.length,
-      status: "unchecked",
-    };
-    return {
-      ...state,
-      todoInput: "",
-      todoItem: [...todoItem, newItem],
-    };
-  };
   return (
-    <StyledInputSection onSubmit={onFormSubmit}>
+    <StyledInputSection onSubmit={handleFormSubmit}>
       <input
         ref={inputRef}
         value={todoInput}
         placeholder="enter task"
         onChange={(e) => {
-          setState(setTodoInput(e.target.value));
+          setTodoInput(e.target.value);
         }}
       />
       <MonitorBtn>
