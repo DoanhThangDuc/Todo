@@ -16,16 +16,18 @@ function TodoList() {
   };
 
   const [state, setState] = useState(initialState);
-  const {  todoItem, filter } = state;
+  const { todoItem, filter } = state;
 
   const handleFilter = (status) => {
     switch (status) {
       case "all":
         return todoItem;
       case "checked":
-        return todoItem.filter((item) => item.status === "checked");
+        let checkedItems = todoItem.filter((item) => item.status === "checked");
+        return checkedItems;
       case "crossed":
-        return todoItem.filter((item) => item.status === "crossed");
+        let crossedItems = todoItem.filter((item) => item.status === "crossed");
+        return crossedItems;
     }
   };
 
@@ -36,6 +38,14 @@ function TodoList() {
     setState({ ...state, todoItem: [...todoItem, itemValue] });
   };
 
+  const updateTodoItem = (id, checkStatus) => {
+    setState((current) => {
+      let updatedItem = current.todoItem.map((item) =>
+        item.id === id ? { ...item, status: checkStatus } : item
+      );
+      return { ...current, todoItem: updatedItem };
+    });
+  };
 
   return (
     <StyledTodoList>
@@ -47,9 +57,9 @@ function TodoList() {
               <TodoItem
                 key={item.id}
                 content={item.content}
-                item={item}
-                state={state}
-                setState={setState}
+                id={item.id}
+                updateTodoItem={updateTodoItem}
+                status={item.status}
               ></TodoItem>
             );
           })}
