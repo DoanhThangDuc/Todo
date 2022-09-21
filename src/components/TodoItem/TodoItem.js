@@ -2,7 +2,7 @@ import { memo } from "react";
 import { Item, Icons, Content, ChatIcon } from "./TodoItem.styled";
 import TodoCheckbox from "../TodoCheckbox/TodoCheckbox";
 
-function TodoItem({ item, updateTodoItem }) {
+function TodoItem({ item, updateTodoItemStatus }) {
   const handleCheckStatus = () => {
     let itemStatus;
     switch (item.status) {
@@ -19,7 +19,7 @@ function TodoItem({ item, updateTodoItem }) {
         itemStatus = "unchecked";
         break;
     }
-    updateTodoItem(item.id, itemStatus);
+    updateTodoItemStatus(item.id, itemStatus);
   };
   return (
     <Item>

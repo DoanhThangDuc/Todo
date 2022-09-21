@@ -1,22 +1,13 @@
 import { useRef, useState } from "react";
 import { StyledInputSection, MonitorBtn } from "./InputSection.styled";
 
-function InputSection({ getNextId, createTodoItem }) {
+function InputSection({ onSubmitTodoContent }) {
   const [todoInput, setTodoInput] = useState("");
   const inputRef = useRef();
 
-  const newTodoItem = (todoInput) => {
-    const newItem = {
-      content: todoInput,
-      status: "unchecked",
-      id: getNextId(todoInput),
-    };
-    return newItem;
-  };
-
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    createTodoItem(newTodoItem(todoInput));
+    onSubmitTodoContent(todoInput);
     setTodoInput("");
     inputRef.current.focus();
   };
