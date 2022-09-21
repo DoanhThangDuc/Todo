@@ -32,7 +32,7 @@ function TodoList() {
   };
 
   const getNextId = (todoInput) => {
-    return todoInput.toString();
+    return todoItem.length + todoInput.toString();
   };
   const createTodoItem = (itemValue) => {
     setState({ ...state, todoItem: [...todoItem, itemValue] });
@@ -56,10 +56,8 @@ function TodoList() {
             return (
               <TodoItem
                 key={item.id}
-                content={item.content}
-                id={item.id}
+                item={item}
                 updateTodoItem={updateTodoItem}
-                status={item.status}
               ></TodoItem>
             );
           })}

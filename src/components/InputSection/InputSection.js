@@ -5,18 +5,18 @@ function InputSection({ getNextId, createTodoItem }) {
   const [todoInput, setTodoInput] = useState("");
   const inputRef = useRef();
 
-  const setTodoItem = (todoInput) => {
-    const newTodoItem = {
+  const newTodoItem = (todoInput) => {
+    const newItem = {
       content: todoInput,
       status: "unchecked",
       id: getNextId(todoInput),
     };
-    return newTodoItem;
+    return newItem;
   };
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    createTodoItem(setTodoItem(todoInput));
+    createTodoItem(newTodoItem(todoInput));
     setTodoInput("");
     inputRef.current.focus();
   };
