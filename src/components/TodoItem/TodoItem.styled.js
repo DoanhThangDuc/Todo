@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { FiMessageSquare } from "react-icons/fi";
 
 export const Item = styled.li`
   display: inline-flex;
@@ -17,6 +18,10 @@ export const Content = styled.p`
 `;
 
 export const Icons = styled.div`
-position: relative;
+  position: relative;
   cursor: pointer;
+`;
+export const ChatIcon = styled(FiMessageSquare)`
+  transform: scaleX(-1);
+  color: "#3d3a3a";
 `;

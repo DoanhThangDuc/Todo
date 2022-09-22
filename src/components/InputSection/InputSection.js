@@ -1,24 +1,25 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { StyledInputSection, MonitorBtn } from "./InputSection.styled";
 
-function InputSection({ onSetTodoInput, onSetList, todoInput, list }) {
+function InputSection({ onSubmitTodoContent }) {
+  const [todoInput, setTodoInput] = useState("");
   const inputRef = useRef();
 
-  const onFormSubmit = (e) => {
+  const handleFormSubmit = (e) => {
     e.preventDefault();
-    onSetList([...list, todoInput]);
-    onSetTodoInput("");
+    onSubmitTodoContent(todoInput);
+    setTodoInput("");
     inputRef.current.focus();
   };
 
   return (
-    <StyledInputSection onSubmit={onFormSubmit}>
+    <StyledInputSection onSubmit={handleFormSubmit}>
       <input
         ref={inputRef}
         value={todoInput}
         placeholder="enter task"
         onChange={(e) => {
-          onSetTodoInput(e.target.value);
+          setTodoInput(e.target.value);
         }}
       />
       <MonitorBtn>

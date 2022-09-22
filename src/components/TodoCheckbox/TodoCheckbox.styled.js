@@ -11,12 +11,12 @@ export const TickIcon = styled(AiOutlineCheck)`
   margin-top: -30px;
   color: #4e4949;
 `;
-export const CheckIcon = styled.div``;
+export const TickIconContainer = styled.div``;
 
-export const ClearIcon = styled(FaTimes)`
+export const CrossIcon = styled(FaTimes)`
   color: red;
 `;
-export const DeleteIcon = styled.div`
+export const CrossIconContainer = styled.div`
   position: absolute;
   top: -11px;
   left: 2px;

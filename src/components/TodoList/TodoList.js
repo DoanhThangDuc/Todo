@@ -6,28 +6,89 @@ import {
   TodoContainer,
   StyledList,
   HeadContent,
+  StyleFilterPanel,
 } from "./TodoList.styled";
 
 function TodoList() {
-  const [todoInput, setTodoInput] = useState("");
-  const [list, setList] = useState([]);
+  const initialState = {
+    todoItem: [],
+    filter: "all",
+  };
+
+  const [state, setState] = useState(initialState);
+  const { todoItem, filter } = state;
+
+  const filterTodoItems = (status) => {
+    switch (status) {
+      case "all":
+        return todoItem;
+      case "checked":
+        const checkedItems = todoItem.filter(
+          (item) => item.status === "checked"
+        );
+        return checkedItems;
+      case "crossed":
+        const crossedItems = todoItem.filter(
+          (item) => item.status === "crossed"
+        );
+        return crossedItems;
+    }
+  };
+
+  const getNextId = (todoInput) => {
+    return todoItem.length + todoInput.toString();
+  };
+
+  const createTodoItem = (itemValue) => {
+    setState({ ...state, todoItem: [...todoItem, itemValue] });
+  };
+
+  const onSubmitTodoContent = (todoInput) => {
+    const newItem = {
+      content: todoInput,
+      status: "unchecked",
+      id: getNextId(todoInput),
+    };
+    createTodoItem(newItem);
+  };
+
+  const updateTodoItemStatus = (id, checkStatus) => {
+    setState((current) => {
+      const updatedItem = current.todoItem.map((item) =>
+        item.id === id ? { ...item, status: checkStatus } : item
+      );
+      return { ...current, todoItem: updatedItem };
+    });
+  };
+
   return (
     <StyledTodoList>
       <StyledList>
         <HeadContent>Check List</HeadContent>
         <TodoContainer>
-          {/* checkStatus: checked, unchecked, crossed. */}
-          {/* background, content*/}
-          {list.map((item) => {
-            return <TodoItem key={item.toString()} content={item}></TodoItem>;
+          {filterTodoItems(state.filter).map((item) => {
+            return (
+              <TodoItem
+                key={item.id}
+                item={item}
+                updateTodoItemStatus={updateTodoItemStatus}
+              ></TodoItem>
+            );
           })}
         </TodoContainer>
-        <InputSection
-          onSetTodoInput={setTodoInput}
-          onSetList={setList}
-          todoInput={todoInput}
-          list={list}
-        ></InputSection>
+        <InputSection onSubmitTodoContent={onSubmitTodoContent}></InputSection>
+        <StyleFilterPanel>
+          <h2>Show:</h2>
+          <button onClick={() => setState({ ...state, filter: "all" })}>
+            All
+          </button>
+          <button onClick={() => setState({ ...state, filter: "checked" })}>
+            Checked
+          </button>
+          <button onClick={() => setState({ ...state, filter: "crossed" })}>
+            Crossed
+          </button>
+        </StyleFilterPanel>
       </StyledList>
     </StyledTodoList>
   );

@@ -16,13 +16,11 @@ export const StyledList = styled.div`
   li {
     list-style: none;
   }
-  
-  `;
+`;
 export const TodoContainer = styled.ul`
-display: flex;
-flex-direction: column;
-
-`
+  display: flex;
+  flex-direction: column;
+`;
 export const HeadContent = styled.p`
   padding: 0 0 1rem 6rem;
   color: #434141;
@@ -34,7 +32,6 @@ export const HeadContent = styled.p`
   text-underline-offset: 5px;
 `;
 
-
 export const InputBtn = styled.button`
   /* display: flex; */
   display: none;
@@ -44,4 +41,38 @@ export const InputBtn = styled.button`
   color: #434343;
   border: none;
   cursor: pointer;
+`;
+export const StyleFilterPanel = styled.div`
+  display: inline-flex;
+  position: absolute;
+  top: 450px;
+  justify-content: space-around;
+  padding: 40px 50px 0;
+  width: 80%;
+  & h2 {
+    color: #434343;
+    font-size: 20px;
+  }
+  & button {
+    width: 20%;
+    border: none;
+    border-right: 1px solid black;
+    background-color: inherit;
+    cursor: pointer;
+  }
+  & button:nth-child(2):hover {
+    color: yellow;
+    font-weight: bold;
+    font-size: 17px;
+  }
+  & button:nth-child(3):hover {
+    color: green;
+    font-weight: bold;
+    font-size: 17px;
+  }
+  & button:nth-child(4):hover {
+    color: red;
+    font-weight: bold;
+    font-size: 17px;
+  }
 `;
