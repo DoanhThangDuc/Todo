@@ -1,7 +1,7 @@
 import TodoBoard from "./components/Todo/TodoBoard";
-import GlobalStyles from "./components/Global.styled";
+import GlobalStyles from "./shared/Global.styled";
 import { ThemeProvider } from "styled-components";
-const theme = {
+export const theme = {
   colors: {
     header: "#edfbff",
     body: "#141516",

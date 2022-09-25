@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import { StyledInputSection, MonitorBtn } from "./InputSection.styled";
-
+import PropTypes from "prop-types";
 function InputSection({ onSubmitTodoContent }) {
   const [todoInput, setTodoInput] = useState("");
   const inputRef = useRef();
@@ -29,5 +29,7 @@ function InputSection({ onSubmitTodoContent }) {
     </StyledInputSection>
   );
 }
-
+InputSection.propTypes = {
+  onSubmitTodoContent: PropTypes.func,
+};
 export default InputSection;

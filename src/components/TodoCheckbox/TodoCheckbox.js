@@ -5,6 +5,7 @@ import {
   CrossIcon,
   TickIconContainer,
 } from "./TodoCheckbox.styled";
+import PropTypes from "prop-types";
 
 function TodoCheckbox({ checkStatus }) {
   return (
@@ -22,4 +23,7 @@ function TodoCheckbox({ checkStatus }) {
     </IconContain>
   );
 }
+TodoCheckbox.propTypes = {
+  checkStatus: PropTypes.string.isRequired,
+};
 export default TodoCheckbox;
