@@ -1,6 +1,7 @@
 import { useState } from "react";
 import TodoItem from "../TodoItem/TodoItem";
 import InputSection from "../InputSection/InputSection";
+import PropTypes from "prop-types";
 import {
   StyledTodoList,
   TodoContainer,
@@ -9,7 +10,7 @@ import {
   StyleFilterPanel,
 } from "./TodoList.styled";
 
-function TodoList() {
+function TodoList({ itemValues }) {
   const initialState = {
     todoItem: [],
     filter: "all",
@@ -66,6 +67,14 @@ function TodoList() {
       <StyledList>
         <HeadContent>Check List</HeadContent>
         <TodoContainer>
+          {itemValues != undefined &&
+            itemValues.map((item) => (
+              <TodoItem
+                key={item.id}
+                item={item}
+                updateTodoItemStatus={updateTodoItemStatus}
+              ></TodoItem>
+            ))}
           {filterTodoItems(state.filter).map((item) => {
             return (
               <TodoItem
@@ -93,4 +102,11 @@ function TodoList() {
     </StyledTodoList>
   );
 }
+TodoList.propTypes = {
+  itemValues: PropTypes.shape({
+    content: PropTypes.string.isRequired,
+    status: PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired,
+  }),
+};
 export default TodoList;

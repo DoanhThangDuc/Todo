@@ -1,6 +1,6 @@
 import React from "react";
-import TodoList from "./TodoList";
 import GlobalStyle from "../../shared/Global.styled";
+import TodoList from "./TodoList";
 
 export default {
   component: TodoList,
@@ -15,7 +15,14 @@ export default {
   ],
 };
 
-const Template = (args) => <TodoList {...args} />;
+const Template = (args) => <TodoList {...args}></TodoList>;
 
 export const Default = Template.bind({});
-Default.args = {};
+export const AddMoreItems = Template.bind({});
+AddMoreItems.args = {
+  itemValues: [
+    { content: "todoInput", status: "unchecked", id: "todoInput" },
+    { content: "todoInput2", status: "crossed", id: "todoInput2" },
+    { content: "todoInput3", status: "checked", id: "todoInput3" },
+  ],
+};
