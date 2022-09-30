@@ -1,5 +1,5 @@
 import { createGlobalStyle } from "styled-components";
-const GlobalStyle = createGlobalStyle`
+export const GlobalStyle = createGlobalStyle`
   * {
     margin: 0;
     padding: 0;
@@ -8,8 +8,6 @@ const GlobalStyle = createGlobalStyle`
     text-decoration: none;
   }
   body {
-  background: url("/img/Background.png");
-  background-size: 100vw 100vh ; 
   overflow-y: hidden;
   }
 `;

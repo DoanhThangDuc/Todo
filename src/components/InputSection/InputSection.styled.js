@@ -8,7 +8,7 @@ export const StyledInputSection = styled.form`
   & input {
     height: 6vh;
     width: 100%;
-    border: 1px solid black;
+    border: none;
     padding-left: 10px;
 
     font-family: "Work Sans";
