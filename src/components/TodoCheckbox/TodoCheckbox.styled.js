@@ -1,23 +1,24 @@
 import styled from "styled-components";
 import { AiOutlineCheck } from "react-icons/ai";
 import { FaTimes } from "react-icons/fa";
+import { FiMessageSquare } from "react-icons/fi";
 
-export const IconContain = styled.div`
-  position: absolute;
-  top: 12px;
+export const IconsContainer = styled.div`
+  position: relative;
+`;
+export const ChatIcon = styled(FiMessageSquare)`
+  transform: scaleX(-1);
+  color: "#3d3a3a";
 `;
 export const TickIcon = styled(AiOutlineCheck)`
-  margin-left: 0px;
-  margin-top: -30px;
-  color: #4e4949;
-`;
-export const TickIconContainer = styled.div``;
-
-export const CrossIcon = styled(FaTimes)`
-  color: red;
-`;
-export const CrossIconContainer = styled.div`
   position: absolute;
-  top: -11px;
-  left: 2px;
+  left: 0;
+  top: -12px;
+  color: "#3d3a3a";
+`;
+export const CrossIcon = styled(FaTimes)`
+  position: absolute;
+  left: 4px;
+  top: 1px;
+  color: red;
 `;

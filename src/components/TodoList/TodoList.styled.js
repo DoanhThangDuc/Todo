@@ -2,16 +2,12 @@ import styled from "styled-components";
 
 export const StyledTodoList = styled.div`
   position: relative;
+  width: 50vw;
   height: 100vh;
-  flex: 1;
 `;
 export const StyledList = styled.div`
-  position: absolute;
   display: flex;
   flex-direction: column;
-  width: calc(50vw - 12rem);
-  top: 20vh;
-  left: 2rem;
   & ul,
   li {
     list-style: none;
@@ -22,7 +18,7 @@ export const TodoContainer = styled.ul`
   flex-direction: column;
 `;
 export const HeadContent = styled.p`
-  padding: 0 0 1rem 6rem;
+  padding: 2.9em 0 0 2.9em;
   color: #434141;
   font-family: "Work Sans";
   font-style: italic;
@@ -33,22 +29,20 @@ export const HeadContent = styled.p`
 `;
 
 export const InputBtn = styled.button`
-  /* display: flex; */
   display: none;
   justify-content: left;
-  padding: 20px 0 20px 30px;
   background-color: inherit;
   color: #434343;
   border: none;
   cursor: pointer;
 `;
 export const StyleFilterPanel = styled.div`
-  display: inline-flex;
   position: absolute;
-  top: 450px;
+  /* z-index: 1; */
+  display: inline-flex;
   justify-content: space-around;
-  padding: 40px 50px 0;
-  width: 80%;
+  width: 27em;
+  margin: 49em 0 0 8.5em;
   & h2 {
     color: #434343;
     font-size: 20px;
