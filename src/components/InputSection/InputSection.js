@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import { StyledInputSection, MonitorBtn } from "./InputSection.styled";
-
-function InputSection({ onSubmitTodoContent }) {
+import PropTypes from "prop-types";
+function InputSection({ inputValues, onSubmitTodoContent }) {
   const [todoInput, setTodoInput] = useState("");
   const inputRef = useRef();
 
@@ -16,7 +16,7 @@ function InputSection({ onSubmitTodoContent }) {
     <StyledInputSection onSubmit={handleFormSubmit}>
       <input
         ref={inputRef}
-        value={todoInput}
+        value={inputValues ? inputValues : todoInput}
         placeholder="enter task"
         onChange={(e) => {
           setTodoInput(e.target.value);
@@ -29,5 +29,8 @@ function InputSection({ onSubmitTodoContent }) {
     </StyledInputSection>
   );
 }
-
+InputSection.propTypes = {
+  inputValues: PropTypes.string,
+  onSubmitTodoContent: PropTypes.func,
+};
 export default InputSection;

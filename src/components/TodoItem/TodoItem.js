@@ -1,6 +1,7 @@
 import { memo } from "react";
-import { Item, Icons, Content, ChatIcon } from "./TodoItem.styled";
+import { Item, Icons, Content } from "./TodoItem.styled";
 import TodoCheckbox from "../TodoCheckbox/TodoCheckbox";
+import PropTypes from "prop-types";
 
 function TodoItem({ item, updateTodoItemStatus }) {
   const handleCheckStatus = () => {
@@ -24,7 +25,6 @@ function TodoItem({ item, updateTodoItemStatus }) {
   return (
     <Item>
       <Icons onClick={handleCheckStatus}>
-        <ChatIcon size="2.5rem" />
         <TodoCheckbox checkStatus={item.status}></TodoCheckbox>
       </Icons>
       <Content>{item.content}</Content>
@@ -32,4 +32,11 @@ function TodoItem({ item, updateTodoItemStatus }) {
   );
 }
 
+TodoItem.propTypes = {
+  item: PropTypes.shape({
+    content: PropTypes.string.isRequired,
+    status: PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired,
+  }),
+};
 export default memo(TodoItem);

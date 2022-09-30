@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const StyledLogo = styled.div`
-  flex: 1;
+  width: 50vw;
   height: 100vh;
   & img {
     position: absolute;

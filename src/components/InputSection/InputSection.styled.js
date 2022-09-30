@@ -3,11 +3,11 @@ import styled from "styled-components";
 export const StyledInputSection = styled.form`
   display: flex;
   flex-direction: column;
-  padding-top: 20px;
+  width: 70%;
+  padding: 1.5em 0 0 3.5em;
   & input {
-    width: 70%;
-    margin: auto;
     height: 6vh;
+    width: 100%;
     border: none;
     padding-left: 10px;
 
@@ -16,10 +16,10 @@ export const StyledInputSection = styled.form`
 
     color: #434141;
     background-color: inherit;
+    cursor: pointer;
   }
 `;
 export const MonitorBtn = styled.div`
-  height: 100%;
   padding-top: 20px;
   color: red;
   align-self: flex-end;
