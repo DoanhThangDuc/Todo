@@ -1,14 +1,22 @@
 import TodoList from "../TodoList/TodoList";
-import Logo from '../Logo/Logo'
+import Logo from "../Logo/Logo";
 import { StyledTodo } from "./TodoBoard.styled";
+import PropTypes from "prop-types";
 
-function TodoBoard() {
+function TodoBoard({ itemValues }) {
   return (
     <StyledTodo>
       <Logo></Logo>
-      <TodoList></TodoList>
+      <TodoList itemValues={itemValues}></TodoList>
     </StyledTodo>
   );
 }
+TodoBoard.propTypes = {
+  itemValues: PropTypes.shape({
+    content: PropTypes.string.isRequired,
+    status: PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired,
+  }),
+};
 
 export default TodoBoard;

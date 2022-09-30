@@ -9,6 +9,7 @@ export default {
 const Template = (args) => <TodoList {...args}></TodoList>;
 
 export const Default = Template.bind({});
+
 export const AddMoreItems = Template.bind({});
 AddMoreItems.args = {
   itemValues: [
