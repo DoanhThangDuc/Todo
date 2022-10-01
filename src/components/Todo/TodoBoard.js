@@ -16,6 +16,7 @@ TodoBoard.propTypes = {
     content: PropTypes.string.isRequired,
     status: PropTypes.string.isRequired,
     id: PropTypes.string.isRequired,
+    strikeThrough: PropTypes.bool.isRequired,
   }),
 };
 

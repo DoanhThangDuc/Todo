@@ -49,16 +49,50 @@ function TodoList({ itemValues }) {
       content: todoInput,
       status: "unchecked",
       id: getNextId(todoInput),
+      strikeThrough: false,
     };
     createTodoItem(newItem);
   };
 
   const updateTodoItemStatus = (id, checkStatus) => {
     setState((current) => {
-      const updatedItem = current.todoItem.map((item) =>
+      const updatedItemStatus = current.todoItem.map((item) =>
         item.id === id ? { ...item, status: checkStatus } : item
       );
-      return { ...current, todoItem: updatedItem };
+      return { ...current, todoItem: updatedItemStatus };
+    });
+  };
+
+  const updateTodoItemStrikeThrough = (id, strike) => {
+    setState((current) => {
+      const itemHasStrikeThrough = current.todoItem.find((item) =>
+        item.strikeThrough === true ? item : undefined
+      );
+      let updatedItemStrike;
+      if (itemHasStrikeThrough) {
+        const removeStrikeThroughStatus = current.todoItem.map((item) =>
+          item.id === itemHasStrikeThrough.id
+            ? { ...item, strikeThrough: false }
+            : item
+        );
+        updatedItemStrike = removeStrikeThroughStatus.map((item) =>
+          item.id === id ? { ...item, strikeThrough: strike } : item
+        );
+      } else {
+        updatedItemStrike = current.todoItem.map((item) =>
+          item.id === id ? { ...item, strikeThrough: strike } : item
+        );
+      }
+      return { ...current, todoItem: updatedItemStrike };
+    });
+  };
+
+  const deleteTodoItem = (id) => {
+    setState((current) => {
+      const updatedItemDeleted = current.todoItem.filter((item) =>
+        item.id !== id ? item : null
+      );
+      return { ...current, todoItem: updatedItemDeleted };
     });
   };
 
@@ -81,6 +115,8 @@ function TodoList({ itemValues }) {
                 key={item.id}
                 item={item}
                 updateTodoItemStatus={updateTodoItemStatus}
+                onUpdateTodoItemStrikeThrough={updateTodoItemStrikeThrough}
+                onDeleteTodoItem={deleteTodoItem}
               ></TodoItem>
             );
           })}
