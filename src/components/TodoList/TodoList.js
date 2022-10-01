@@ -69,20 +69,22 @@ function TodoList({ itemValues }) {
         item.strikeThrough === true ? item : undefined
       );
       let updatedItemStrike;
-      if (itemHasStrikeThrough) {
-        const removeStrikeThroughStatus = current.todoItem.map((item) =>
-          item.id === itemHasStrikeThrough.id
-            ? { ...item, strikeThrough: false }
-            : item
-        );
-        updatedItemStrike = removeStrikeThroughStatus.map((item) =>
-          item.id === id ? { ...item, strikeThrough: strike } : item
-        );
-      } else {
+      // there is no items have strikeThrough
+      if (!itemHasStrikeThrough) {
         updatedItemStrike = current.todoItem.map((item) =>
           item.id === id ? { ...item, strikeThrough: strike } : item
         );
+        return { ...current, todoItem: updatedItemStrike };
       }
+      // have item has strikeThrough
+      const removeStrikeThroughStatus = current.todoItem.map((item) =>
+        item.id === itemHasStrikeThrough.id
+          ? { ...item, strikeThrough: false }
+          : item
+      );
+      updatedItemStrike = removeStrikeThroughStatus.map((item) =>
+        item.id === id ? { ...item, strikeThrough: strike } : item
+      );
       return { ...current, todoItem: updatedItemStrike };
     });
   };

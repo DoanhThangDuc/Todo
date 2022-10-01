@@ -24,8 +24,6 @@ export const Content = styled.p`
           ${strikeThrough}
         `
       : ""}
-  text-decoration: ${(props) =>
-    props.lineThrough === true ? "line-through" : "none"};
   padding-left: 50px;
   transform: translateY(-25%);
   cursor: pointer;
