@@ -30,9 +30,12 @@ function TodoItem({
 
   const handleStrikethrough = (id) => {
     let strike = item.strikeThrough;
-    if (strike === true) return onDeleteTodoItem(id);
+    if (strike === true) {
+      onDeleteTodoItem(id);
+      return;
+    }
     strike = true;
-    onUpdateTodoItemStrikeThrough(id, strike);
+    onUpdateTodoItemStrikeThrough(id);
   };
   return (
     <Item>

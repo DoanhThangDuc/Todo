@@ -12,24 +12,24 @@ import {
 
 function TodoList({ itemValues }) {
   const initialState = {
-    todoItem: [],
+    todoItems: [],
     filter: "all",
   };
 
   const [state, setState] = useState(initialState);
-  const { todoItem, filter } = state;
+  const { todoItems, filter } = state;
 
   const filterTodoItems = (status) => {
     switch (status) {
       case "all":
-        return todoItem;
+        return todoItems;
       case "checked":
-        const checkedItems = todoItem.filter(
+        const checkedItems = todoItems.filter(
           (item) => item.status === "checked"
         );
         return checkedItems;
       case "crossed":
-        const crossedItems = todoItem.filter(
+        const crossedItems = todoItems.filter(
           (item) => item.status === "crossed"
         );
         return crossedItems;
@@ -37,11 +37,11 @@ function TodoList({ itemValues }) {
   };
 
   const getNextId = (todoInput) => {
-    return todoItem.length + todoInput.toString();
+    return todoItems.length + todoInput.toString();
   };
 
   const createTodoItem = (itemValue) => {
-    setState({ ...state, todoItem: [...todoItem, itemValue] });
+    setState({ ...state, todoItems: [...todoItems, itemValue] });
   };
 
   const onSubmitTodoContent = (todoInput) => {
@@ -56,45 +56,34 @@ function TodoList({ itemValues }) {
 
   const updateTodoItemStatus = (id, checkStatus) => {
     setState((current) => {
-      const updatedItemStatus = current.todoItem.map((item) =>
+      const updatedItemStatus = current.todoItems.map((item) =>
         item.id === id ? { ...item, status: checkStatus } : item
       );
-      return { ...current, todoItem: updatedItemStatus };
+      return { ...current, todoItems: updatedItemStatus };
     });
   };
 
-  const updateTodoItemStrikeThrough = (id, strike) => {
+  const updateTodoItemStrikeThrough = (id) => {
     setState((current) => {
-      const itemHasStrikeThrough = current.todoItem.find((item) =>
-        item.strikeThrough === true ? item : undefined
-      );
-      let updatedItemStrike;
-      // there is no items have strikeThrough
-      if (!itemHasStrikeThrough) {
-        updatedItemStrike = current.todoItem.map((item) =>
-          item.id === id ? { ...item, strikeThrough: strike } : item
-        );
-        return { ...current, todoItem: updatedItemStrike };
-      }
-      // have item has strikeThrough
-      const removeStrikeThroughStatus = current.todoItem.map((item) =>
-        item.id === itemHasStrikeThrough.id
-          ? { ...item, strikeThrough: false }
-          : item
-      );
-      updatedItemStrike = removeStrikeThroughStatus.map((item) =>
-        item.id === id ? { ...item, strikeThrough: strike } : item
-      );
-      return { ...current, todoItem: updatedItemStrike };
+      const updatedItemStrike = current.todoItems.map((item) => {
+        if (item.strikeThrough === false && item.id === id) {
+          return { ...item, strikeThrough: true };
+        }
+        if (item.strikeThrough === true && item.id !== id) {
+          return { ...item, strikeThrough: false };
+        }
+        return item;
+      });
+      return { ...current, todoItems: updatedItemStrike };
     });
   };
 
   const deleteTodoItem = (id) => {
     setState((current) => {
-      const updatedItemDeleted = current.todoItem.filter((item) =>
-        item.id !== id ? item : null
+      const updatedItemDeleted = current.todoItems.filter(
+        (item) => item.id !== id
       );
-      return { ...current, todoItem: updatedItemDeleted };
+      return { ...current, todoItems: updatedItemDeleted };
     });
   };
 
