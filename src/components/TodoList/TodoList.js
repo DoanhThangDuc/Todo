@@ -17,7 +17,7 @@ function TodoList({ itemValues }) {
   };
 
   const [state, setState] = useState(initialState);
-  const { todoItems, filter } = state;
+  const { todoItems } = state;
 
   const filterTodoItems = (status) => {
     switch (status) {
@@ -63,30 +63,28 @@ function TodoList({ itemValues }) {
     });
   };
 
-  const updateTodoItemStrikeThrough = (id) => {
+  const handleUpdateStrikeThrough = (id) => {
     setState((current) => {
-      const updatedItemStrike = current.todoItems.map((item) => {
-        if (item.strikeThrough === false && item.id === id) {
-          return { ...item, strikeThrough: true };
-        }
-        if (item.strikeThrough === true && item.id !== id) {
-          return { ...item, strikeThrough: false };
-        }
-        return item;
-      });
+      const itemHasStrike = todoItems.find(
+        (item) => item.id === id && item.strikeThrough === true
+      );
+      let updatedItemStrike;
+      if (itemHasStrike) {
+        updatedItemStrike = current.todoItems.filter((item) => item.id !== id);
+      } else {
+        updatedItemStrike = current.todoItems.map((item) => {
+          if (item.strikeThrough === false && item.id === id) {
+            return { ...item, strikeThrough: true };
+          }
+          if (item.strikeThrough === true && item.id !== id) {
+            return { ...item, strikeThrough: false };
+          }
+          return item;
+        });
+      }
       return { ...current, todoItems: updatedItemStrike };
     });
   };
-
-  const deleteTodoItem = (id) => {
-    setState((current) => {
-      const updatedItemDeleted = current.todoItems.filter(
-        (item) => item.id !== id
-      );
-      return { ...current, todoItems: updatedItemDeleted };
-    });
-  };
-
   return (
     <StyledTodoList>
       <StyledList>
@@ -106,8 +104,7 @@ function TodoList({ itemValues }) {
                 key={item.id}
                 item={item}
                 updateTodoItemStatus={updateTodoItemStatus}
-                onUpdateTodoItemStrikeThrough={updateTodoItemStrikeThrough}
-                onDeleteTodoItem={deleteTodoItem}
+                handleUpdateStrikeThrough={handleUpdateStrikeThrough}
               ></TodoItem>
             );
           })}

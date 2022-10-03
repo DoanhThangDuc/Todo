@@ -3,12 +3,7 @@ import { Item, Icons, Content } from "./TodoItem.styled";
 import TodoCheckbox from "../TodoCheckbox/TodoCheckbox";
 import PropTypes from "prop-types";
 
-function TodoItem({
-  item,
-  updateTodoItemStatus,
-  onUpdateTodoItemStrikeThrough,
-  onDeleteTodoItem,
-}) {
+function TodoItem({ item, updateTodoItemStatus, handleUpdateStrikeThrough }) {
   const handleCheckStatus = () => {
     let itemStatus;
     switch (item.status) {
@@ -28,22 +23,13 @@ function TodoItem({
     updateTodoItemStatus(item.id, itemStatus);
   };
 
-  const handleStrikethrough = (id) => {
-    let strike = item.strikeThrough;
-    if (strike === true) {
-      onDeleteTodoItem(id);
-      return;
-    }
-    strike = true;
-    onUpdateTodoItemStrikeThrough(id);
-  };
   return (
     <Item>
       <Icons onClick={handleCheckStatus}>
         <TodoCheckbox checkStatus={item.status}></TodoCheckbox>
       </Icons>
       <Content
-        onClick={() => handleStrikethrough(item.id)}
+        onClick={() => handleUpdateStrikeThrough(item.id)}
         lineThrough={item.strikeThrough}
       >
         {item.content}
