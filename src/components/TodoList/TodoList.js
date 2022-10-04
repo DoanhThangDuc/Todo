@@ -65,22 +65,22 @@ function TodoList({ itemValues }) {
 
   const handleUpdateStrikeThrough = (id) => {
     setState((current) => {
-      const isExistItem = current.todoItems.find((item) => item.id === id);
+      const itemClicked = current.todoItems.find((item) => item.id === id);
       let updatedItemStrike;
-      if (!isExistItem) return;
-      if (isExistItem.strikeThrough === false) {
-        updatedItemStrike = current.todoItems.map((item) => {
-          if (item.strikeThrough === false && item.id === isExistItem.id) {
-            return { ...item, strikeThrough: true };
-          }
-          if (item.strikeThrough === true && item.id !== isExistItem.id) {
-            return { ...item, strikeThrough: false };
-          }
-          return item;
-        });
+      if (!itemClicked) return;
+      if (itemClicked.strikeThrough === true) {
+        updatedItemStrike = current.todoItems.filter((item) => item.id !== id);
         return { ...current, todoItems: updatedItemStrike };
       }
-      updatedItemStrike = current.todoItems.filter((item) => item.id !== id);
+      updatedItemStrike = current.todoItems.map((item) => {
+        if (item.strikeThrough === false && item.id === itemClicked.id) {
+          return { ...item, strikeThrough: true };
+        }
+        if (item.strikeThrough === true && item.id !== itemClicked.id) {
+          return { ...item, strikeThrough: false };
+        }
+        return item;
+      });
       return { ...current, todoItems: updatedItemStrike };
     });
   };
