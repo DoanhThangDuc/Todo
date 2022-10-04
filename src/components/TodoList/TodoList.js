@@ -65,26 +65,26 @@ function TodoList({ itemValues }) {
 
   const handleUpdateStrikeThrough = (id) => {
     setState((current) => {
-      const itemHasStrike = todoItems.find(
-        (item) => item.id === id && item.strikeThrough === true
-      );
+      const isExistItem = current.todoItems.find((item) => item.id === id);
       let updatedItemStrike;
-      if (itemHasStrike) {
-        updatedItemStrike = current.todoItems.filter((item) => item.id !== id);
-      } else {
+      if (!isExistItem) return;
+      if (isExistItem.strikeThrough === false) {
         updatedItemStrike = current.todoItems.map((item) => {
-          if (item.strikeThrough === false && item.id === id) {
+          if (item.strikeThrough === false && item.id === isExistItem.id) {
             return { ...item, strikeThrough: true };
           }
-          if (item.strikeThrough === true && item.id !== id) {
+          if (item.strikeThrough === true && item.id !== isExistItem.id) {
             return { ...item, strikeThrough: false };
           }
           return item;
         });
+        return { ...current, todoItems: updatedItemStrike };
       }
+      updatedItemStrike = current.todoItems.filter((item) => item.id !== id);
       return { ...current, todoItems: updatedItemStrike };
     });
   };
+
   return (
     <StyledTodoList>
       <StyledList>
@@ -104,7 +104,7 @@ function TodoList({ itemValues }) {
                 key={item.id}
                 item={item}
                 updateTodoItemStatus={updateTodoItemStatus}
-                handleUpdateStrikeThrough={handleUpdateStrikeThrough}
+                onContentClick={handleUpdateStrikeThrough}
               ></TodoItem>
             );
           })}
