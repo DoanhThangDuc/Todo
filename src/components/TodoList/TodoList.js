@@ -68,18 +68,16 @@ function TodoList({ itemValues }) {
       const todoItem = current.todoItems.find((item) => item.id === id);
       if (!todoItem) return;
       if (todoItem.strikeThrough) {
-        const deletedItem = current.todoItems.filter(
-          (item) => item.id !== id
-        );
+        const deletedItem = current.todoItems.filter((item) => item.id !== id);
         return { ...current, todoItems: deletedItem };
       }
-      const updatedItemStrike = current.todoItems.map((item) => {
-        if (item.strikeThrough === false && item.id === todoItem.id) {
+      const updatedItemsStrike = current.todoItems.map((item) => {
+        if (item.id === todoItem.id) {
           return { ...item, strikeThrough: true };
         }
-        return {...item, strikeThrough: false};
+        return { ...item, strikeThrough: false };
       });
-      return { ...current, todoItems: updatedItemStrike };
+      return { ...current, todoItems: updatedItemsStrike };
     });
   };
 
