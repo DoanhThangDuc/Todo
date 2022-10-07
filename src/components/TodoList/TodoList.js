@@ -12,24 +12,24 @@ import {
 
 function TodoList({ itemValues }) {
   const initialState = {
-    todoItem: [],
+    todoItems: [],
     filter: "all",
   };
 
   const [state, setState] = useState(initialState);
-  const { todoItem, filter } = state;
+  const { todoItems } = state;
 
   const filterTodoItems = (status) => {
     switch (status) {
       case "all":
-        return todoItem;
+        return todoItems;
       case "checked":
-        const checkedItems = todoItem.filter(
+        const checkedItems = todoItems.filter(
           (item) => item.status === "checked"
         );
         return checkedItems;
       case "crossed":
-        const crossedItems = todoItem.filter(
+        const crossedItems = todoItems.filter(
           (item) => item.status === "crossed"
         );
         return crossedItems;
@@ -37,11 +37,11 @@ function TodoList({ itemValues }) {
   };
 
   const getNextId = (todoInput) => {
-    return todoItem.length + todoInput.toString();
+    return todoItems.length + todoInput.toString();
   };
 
   const createTodoItem = (itemValue) => {
-    setState({ ...state, todoItem: [...todoItem, itemValue] });
+    setState({ ...state, todoItems: [...todoItems, itemValue] });
   };
 
   const onSubmitTodoContent = (todoInput) => {
@@ -49,16 +49,35 @@ function TodoList({ itemValues }) {
       content: todoInput,
       status: "unchecked",
       id: getNextId(todoInput),
+      strikeThrough: false,
     };
     createTodoItem(newItem);
   };
 
   const updateTodoItemStatus = (id, checkStatus) => {
     setState((current) => {
-      const updatedItem = current.todoItem.map((item) =>
+      const updatedItemStatus = current.todoItems.map((item) =>
         item.id === id ? { ...item, status: checkStatus } : item
       );
-      return { ...current, todoItem: updatedItem };
+      return { ...current, todoItems: updatedItemStatus };
+    });
+  };
+
+  const handleUpdateStrikeThrough = (id) => {
+    setState((current) => {
+      const todoItem = current.todoItems.find((item) => item.id === id);
+      if (!todoItem) return;
+      if (todoItem.strikeThrough) {
+        const deletedItem = current.todoItems.filter((item) => item.id !== id);
+        return { ...current, todoItems: deletedItem };
+      }
+      const updatedItemsStrike = current.todoItems.map((item) => {
+        if (item.id === todoItem.id) {
+          return { ...item, strikeThrough: true };
+        }
+        return { ...item, strikeThrough: false };
+      });
+      return { ...current, todoItems: updatedItemsStrike };
     });
   };
 
@@ -81,6 +100,7 @@ function TodoList({ itemValues }) {
                 key={item.id}
                 item={item}
                 updateTodoItemStatus={updateTodoItemStatus}
+                onContentClick={handleUpdateStrikeThrough}
               ></TodoItem>
             );
           })}

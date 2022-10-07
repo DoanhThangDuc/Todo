@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const Item = styled.li`
   display: inline-flex;
@@ -10,10 +10,23 @@ export const Item = styled.li`
   color: #615b5b;
   font-size: 1.5rem;
 `;
+
+const strikeThrough = `
+  font-style: italic;
+  color: #7e7171;
+  text-decoration: line-through;
+`;
 export const Content = styled.p`
   background-color: ${(props) => props.background || "inherit"};
+  ${(props) =>
+    props.lineThrough
+      ? css`
+          ${strikeThrough}
+        `
+      : ""}
   padding-left: 50px;
   transform: translateY(-25%);
+  cursor: pointer;
 `;
 export const Icons = styled.div`
   position: relative;

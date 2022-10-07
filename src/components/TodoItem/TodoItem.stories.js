@@ -33,3 +33,10 @@ CrossedItem.args = {
     id: "content 1",
   },
 };
+export const StrikeThrough = Template.bind({});
+StrikeThrough.args = {
+  item: {
+    ...Default.args.item,
+    strikeThrough: true,
+  },
+};
