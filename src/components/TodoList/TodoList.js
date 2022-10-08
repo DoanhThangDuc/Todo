@@ -12,9 +12,9 @@ import {
   createTodoItem,
   updateTodoItemStatus,
   handleUpdateStrikeThrough,
+  sellectAllTodoItems,
 } from "../../features/todos/todosSlice";
 import { useSelector, useDispatch } from "react-redux";
-import { sellectAllTodoItems } from "../../features/todos/todosSlice";
 import { filterTodoItems } from "../../features/filters/filtersSlice";
 
 function TodoList({ itemValues }) {
@@ -31,7 +31,7 @@ function TodoList({ itemValues }) {
       case "Crossed":
         return todoItems.filter((item) => item.status === "crossed");
       default:
-        throw new Error("Unknown status: " + filter);  
+        throw new Error("Unknown status: " + filter);
     }
   };
 
@@ -60,7 +60,11 @@ function TodoList({ itemValues }) {
             );
           })}
         </TodoContainer>
-        <InputSection onSubmitTodoContent={createTodoItem}></InputSection>
+        <InputSection
+          onSubmitTodoContent={(input) => {
+            dispatch(createTodoItem(input));
+          }}
+        ></InputSection>
         <StyleFilterPanel>
           <h2>Show:</h2>
           <button onClick={() => dispatch(filterTodoItems("All"))}>All</button>

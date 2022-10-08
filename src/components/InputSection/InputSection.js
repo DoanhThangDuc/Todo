@@ -1,17 +1,14 @@
 import { useRef, useState } from "react";
 import { StyledInputSection, MonitorBtn } from "./InputSection.styled";
 import PropTypes from "prop-types";
-import { useDispatch } from "react-redux";
-import { createTodoItem } from "../../features/todos/todosSlice";
 
-function InputSection({ inputValues }) {
+function InputSection({ inputValues, onSubmitTodoContent }) {
   const [todoInput, setTodoInput] = useState("");
   const inputRef = useRef();
-  const dispatch = useDispatch();
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    dispatch(createTodoItem(todoInput));
+    onSubmitTodoContent(todoInput);
     setTodoInput("");
     inputRef.current.focus();
   };
