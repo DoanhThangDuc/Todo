@@ -2,15 +2,9 @@ import { memo } from "react";
 import { Item, Icons, Content } from "./TodoItem.styled";
 import TodoCheckbox from "../TodoCheckbox/TodoCheckbox";
 import PropTypes from "prop-types";
-import { useDispatch } from "react-redux";
-import {
-  updateTodoItemStatus,
-  handleUpdateStrikeThrough,
-} from "../../features/todos/todosSlice";
+import { handleUpdateStrikeThrough } from "../../features/todos/todosSlice";
 
-function TodoItem({ item }) {
-  const dispatch = useDispatch();
-
+function TodoItem({ item, updateTodoItemStatus, handleUpdateStrikeThrough }) {
   const handleCheckStatus = () => {
     let itemStatus;
     switch (item.status) {
@@ -28,7 +22,7 @@ function TodoItem({ item }) {
         break;
     }
     const itemId = item.id;
-    dispatch(updateTodoItemStatus({ itemId, itemStatus }));
+    updateTodoItemStatus({itemId, itemStatus});
   };
 
   return (
@@ -37,7 +31,7 @@ function TodoItem({ item }) {
         <TodoCheckbox checkStatus={item.status}></TodoCheckbox>
       </Icons>
       <Content
-        onClick={() => dispatch(handleUpdateStrikeThrough(item.id))}
+        onClick={() => handleUpdateStrikeThrough(item.id)}
         lineThrough={item.strikeThrough}
       >
         {item.content}

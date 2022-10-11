@@ -45,7 +45,9 @@ function TodoList({ itemValues }) {
               <TodoItem
                 key={item.id}
                 item={item}
-                updateTodoItemStatus={updateTodoItemStatus}
+                updateTodoItemStatus={(id, status) => {
+                  dispatch(updateTodoItemStatus(id, status));
+                }}
               ></TodoItem>
             ))}
 
@@ -54,8 +56,13 @@ function TodoList({ itemValues }) {
               <TodoItem
                 key={item.id}
                 item={item}
-                updateTodoItemStatus={updateTodoItemStatus}
+                updateTodoItemStatus={({ itemId, itemStatus }) =>
+                  dispatch(updateTodoItemStatus({ itemId, itemStatus }))
+                }
                 onContentClick={handleUpdateStrikeThrough}
+                handleUpdateStrikeThrough={(id) =>
+                  dispatch(handleUpdateStrikeThrough(id))
+                }
               ></TodoItem>
             );
           })}
