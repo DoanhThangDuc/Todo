@@ -2,9 +2,8 @@ import { memo } from "react";
 import { Item, Icons, Content } from "./TodoItem.styled";
 import TodoCheckbox from "../TodoCheckbox/TodoCheckbox";
 import PropTypes from "prop-types";
-import { handleUpdateStrikeThrough } from "../../features/todos/todosSlice";
 
-function TodoItem({ item, updateTodoItemStatus, handleUpdateStrikeThrough }) {
+function TodoItem({ item, updateTodoItemStatus, onContentClick }) {
   const handleCheckStatus = () => {
     let itemStatus;
     switch (item.status) {
@@ -21,7 +20,7 @@ function TodoItem({ item, updateTodoItemStatus, handleUpdateStrikeThrough }) {
         itemStatus = "unchecked";
         break;
     }
-    const itemId = item.id;
+    const itemId = item.id
     updateTodoItemStatus({itemId, itemStatus});
   };
 
@@ -31,7 +30,7 @@ function TodoItem({ item, updateTodoItemStatus, handleUpdateStrikeThrough }) {
         <TodoCheckbox checkStatus={item.status}></TodoCheckbox>
       </Icons>
       <Content
-        onClick={() => handleUpdateStrikeThrough(item.id)}
+        onClick={() => onContentClick(item.id)}
         lineThrough={item.strikeThrough}
       >
         {item.content}
