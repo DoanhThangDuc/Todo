@@ -54,7 +54,7 @@ export const todosSlice = createSlice({
   },
 });
 
-export const sellectAllTodoItems = (state) => {
+export const selectAllTodoItems = (state) => {
   return state.todoItems;
 };
 
