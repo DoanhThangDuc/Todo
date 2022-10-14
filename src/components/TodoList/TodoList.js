@@ -11,26 +11,12 @@ import {
 
 function TodoList({
   itemValues,
-  todoItems,
   createTodoItem,
   updateTodoItemStatus,
   handleUpdateStrikeThrough,
-  filterStatus,
   filterTodoItems,
+  visibleTodoItems,
 }) {
-  const getVisibleTodos = (todoItems, filter) => {
-    switch (filter) {
-      case "All":
-        return todoItems;
-      case "Checked":
-        return todoItems.filter((item) => item.status === "checked");
-      case "Crossed":
-        return todoItems.filter((item) => item.status === "crossed");
-      default:
-        throw new Error("Unknown status: " + filter);
-    }
-  };
-
   return (
     <StyledTodoList>
       <StyledList>
@@ -45,7 +31,7 @@ function TodoList({
               ></TodoItem>
             ))}
 
-          {getVisibleTodos(todoItems, filterStatus).map((item) => {
+          {visibleTodoItems.map((item) => {
             return (
               <TodoItem
                 key={item.id}

@@ -1,4 +1,5 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createSelector } from "@reduxjs/toolkit";
+
 const initialState = [];
 
 // function nextTodoId(state) {
@@ -57,6 +58,22 @@ export const todosSlice = createSlice({
 export const selectAllTodoItems = (state) => {
   return state.todoItems;
 };
+
+export const selectTodoItemsByStatus = createSelector(
+  (state, filterStatus) => {
+    switch (filterStatus) {
+      case "All":
+        return state.todoItems;
+      case "Checked":
+        return state.todoItems.filter((item) => item.status === "checked");
+      case "Crossed":
+        return state.todoItems.filter((item) => item.status === "crossed");
+      default:
+        throw new Error("Unknown status: " + filterStatus);
+    }
+  },
+  (todoItems) => todoItems
+);
 
 export const {
   createTodoItem,

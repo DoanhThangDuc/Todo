@@ -5,6 +5,7 @@ import {
   updateTodoItemStatus,
   handleUpdateStrikeThrough,
   selectAllTodoItems,
+  selectTodoItemsByStatus,
 } from "../features/todos/todosSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { filterTodoItems } from "../features/filters/filtersSlice";
@@ -12,8 +13,10 @@ import { filterTodoItems } from "../features/filters/filtersSlice";
 function TodoBoardContainer() {
   const todoItems = useSelector(selectAllTodoItems);
   const filterStatus = useSelector((state) => state.filter);
+  const visibleTodoItems = useSelector((state) =>
+    selectTodoItemsByStatus(state, filterStatus)
+  );
   const dispatch = useDispatch();
-
   return (
     <TodoBoard
       todoItems={todoItems}
@@ -28,6 +31,7 @@ function TodoBoardContainer() {
       filterTodoItems={(filterStatus) =>
         dispatch(filterTodoItems(filterStatus))
       }
+      visibleTodoItems={visibleTodoItems}
     />
   );
 }

@@ -9,6 +9,7 @@ function TodoBoard({
   handleUpdateStrikeThrough,
   filterStatus,
   filterTodoItems,
+  visibleTodoItems
 }) {
   return (
     <StyledTodo>
@@ -20,6 +21,7 @@ function TodoBoard({
         handleUpdateStrikeThrough={handleUpdateStrikeThrough}
         filterStatus={filterStatus}
         filterTodoItems={filterTodoItems}
+        visibleTodoItems={visibleTodoItems}
       />
     </StyledTodo>
   );
