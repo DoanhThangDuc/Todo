@@ -1,11 +1,26 @@
 import Logo from "../Logo/Logo";
 import { StyledTodo } from "./TodoBoard.styled";
-import ControlTodoList from "../../container/ControlTodoList";
-function TodoBoard() {
+import TodoList from "../TodoList/TodoList";
+
+function TodoBoard({
+  todoItems,
+  createTodoItem,
+  updateTodoItemStatus,
+  handleUpdateStrikeThrough,
+  filterStatus,
+  filterTodoItems,
+}) {
   return (
     <StyledTodo>
       <Logo />
-      <ControlTodoList />
+      <TodoList
+        todoItems={todoItems}
+        createTodoItem={createTodoItem}
+        updateTodoItemStatus={updateTodoItemStatus}
+        handleUpdateStrikeThrough={handleUpdateStrikeThrough}
+        filterStatus={filterStatus}
+        filterTodoItems={filterTodoItems}
+      />
     </StyledTodo>
   );
 }

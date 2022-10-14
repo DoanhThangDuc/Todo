@@ -41,9 +41,7 @@ function TodoList({
               <TodoItem
                 key={item.id}
                 item={item}
-                updateTodoItemStatus={({ itemId, itemStatus }) => {
-                  updateTodoItemStatus({ itemId, itemStatus });
-                }}
+                updateTodoItemStatus={updateTodoItemStatus}
               ></TodoItem>
             ))}
 
@@ -52,19 +50,13 @@ function TodoList({
               <TodoItem
                 key={item.id}
                 item={item}
-                updateTodoItemStatus={({ itemId, itemStatus }) => {
-                  updateTodoItemStatus({ itemId, itemStatus });
-                }}
-                onContentClick={(id) => handleUpdateStrikeThrough(id)}
+                updateTodoItemStatus={updateTodoItemStatus}
+                onContentClick={handleUpdateStrikeThrough}
               ></TodoItem>
             );
           })}
         </TodoContainer>
-        <InputSection
-          onSubmitTodoContent={(input) => {
-            createTodoItem(input);
-          }}
-        ></InputSection>
+        <InputSection onSubmitTodoContent={createTodoItem}></InputSection>
         <StyleFilterPanel>
           <h2>Show:</h2>
           <button onClick={() => filterTodoItems("All")}>All</button>

@@ -1,5 +1,5 @@
 import React from "react";
-import TodoList from "../components/TodoList/TodoList";
+import TodoBoard from "../components/Todo/TodoBoard";
 import {
   createTodoItem,
   updateTodoItemStatus,
@@ -9,13 +9,13 @@ import {
 import { useSelector, useDispatch } from "react-redux";
 import { filterTodoItems } from "../features/filters/filtersSlice";
 
-function ControlTodoList() {
+function TodoBoardContainer() {
   const todoItems = useSelector(selectAllTodoItems);
   const filterStatus = useSelector((state) => state.filter);
   const dispatch = useDispatch();
 
   return (
-    <TodoList
+    <TodoBoard
       todoItems={todoItems}
       createTodoItem={(input) => dispatch(createTodoItem(input))}
       updateTodoItemStatus={({ itemId, itemStatus }) =>
@@ -32,4 +32,4 @@ function ControlTodoList() {
   );
 }
 
-export default ControlTodoList;
+export default TodoBoardContainer;
