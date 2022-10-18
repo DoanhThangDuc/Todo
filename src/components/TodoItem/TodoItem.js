@@ -20,8 +20,8 @@ function TodoItem({ item, updateTodoItemStatus, onContentClick }) {
         itemStatus = "unchecked";
         break;
     }
-    const itemId = item.id
-    updateTodoItemStatus({itemId, itemStatus});
+    const itemId = item.id;
+    updateTodoItemStatus({ itemId, itemStatus });
   };
 
   return (

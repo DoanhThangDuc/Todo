@@ -61,7 +61,7 @@ export const selectAllTodoItems = (state) => {
 };
 
 export const selectTodoItemsByStatus = createSelector(
-  [(state) => state.todoItems, (state, filterStatus) => filterStatus],
+  [(state) => state.todoItems, (state) => state.filter],
   (todoItems, filterStatus) => {
     switch (filterStatus) {
       case "All":

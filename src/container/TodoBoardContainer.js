@@ -12,15 +12,12 @@ import { filterTodoItems } from "../features/filters/filtersSlice";
 
 function TodoBoardContainer() {
   const state = useSelector((state) => state);
-  const todoItems = useSelector(selectAllTodoItems);
-  const filterStatus = useSelector((state) => state.filter);
-
-  const visibleTodoItems = selectTodoItemsByStatus(state, filterStatus);
+  const visibleTodoItems = selectTodoItemsByStatus(state);
 
   const dispatch = useDispatch();
   return (
     <TodoBoard
-      todoItems={todoItems}
+      todoItems={state.todoItems}
       createTodoItem={(input) => dispatch(createTodoItem(input))}
       updateTodoItemStatus={({ itemId, itemStatus }) =>
         dispatch(updateTodoItemStatus({ itemId, itemStatus }))
@@ -28,7 +25,7 @@ function TodoBoardContainer() {
       handleUpdateStrikeThrough={(id) =>
         dispatch(handleUpdateStrikeThrough(id))
       }
-      filterStatus={filterStatus}
+      filterStatus={state.filter}
       filterTodoItems={(filterStatus) =>
         dispatch(filterTodoItems(filterStatus))
       }
