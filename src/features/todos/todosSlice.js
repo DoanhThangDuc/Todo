@@ -1,4 +1,5 @@
-import { createSlice, createSelector } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
+import { createSelector } from "reselect";
 
 const initialState = [];
 
@@ -60,19 +61,19 @@ export const selectAllTodoItems = (state) => {
 };
 
 export const selectTodoItemsByStatus = createSelector(
-  (state, filterStatus) => {
+  [(state) => state.todoItems, (state, filterStatus) => filterStatus],
+  (todoItems, filterStatus) => {
     switch (filterStatus) {
       case "All":
-        return state.todoItems;
+        return todoItems;
       case "Checked":
-        return state.todoItems.filter((item) => item.status === "checked");
+        return todoItems.filter((item) => item.status === "checked");
       case "Crossed":
-        return state.todoItems.filter((item) => item.status === "crossed");
+        return todoItems.filter((item) => item.status === "crossed");
       default:
         throw new Error("Unknown status: " + filterStatus);
     }
-  },
-  (todoItems) => todoItems
+  }
 );
 
 export const {

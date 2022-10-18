@@ -11,11 +11,12 @@ import { useSelector, useDispatch } from "react-redux";
 import { filterTodoItems } from "../features/filters/filtersSlice";
 
 function TodoBoardContainer() {
+  const state = useSelector((state) => state);
   const todoItems = useSelector(selectAllTodoItems);
   const filterStatus = useSelector((state) => state.filter);
-  const visibleTodoItems = useSelector((state) =>
-    selectTodoItemsByStatus(state, filterStatus)
-  );
+
+  const visibleTodoItems = selectTodoItemsByStatus(state, filterStatus);
+
   const dispatch = useDispatch();
   return (
     <TodoBoard
