@@ -1,20 +1,22 @@
 import React from "react";
+import { connect } from "react-redux";
+
 import TodoBoard from "../components/Todo/TodoBoard";
 import {
   createTodoItem,
   updateTodoItemStatus,
   handleUpdateStrikeThrough,
-  selectAllTodoItems,
-  selectTodoItemsByStatus,
 } from "../features/todos/todosSlice";
-import { useSelector, useDispatch } from "react-redux";
 import { filterTodoItems } from "../features/filters/filtersSlice";
+import { selectTodoItemsByStatus } from "../selector";
 
-function TodoBoardContainer() {
-  const state = useSelector((state) => state);
+const mapStateToProps = (state) => ({
+  state: state,
+});
+
+function TodoBoardContainer({ state, dispatch }) {
   const visibleTodoItems = selectTodoItemsByStatus(state);
 
-  const dispatch = useDispatch();
   return (
     <TodoBoard
       todoItems={state.todoItems}
@@ -34,4 +36,4 @@ function TodoBoardContainer() {
   );
 }
 
-export default TodoBoardContainer;
+export default connect(mapStateToProps)(TodoBoardContainer);

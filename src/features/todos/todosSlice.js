@@ -56,26 +56,6 @@ export const todosSlice = createSlice({
   },
 });
 
-export const selectAllTodoItems = (state) => {
-  return state.todoItems;
-};
-
-export const selectTodoItemsByStatus = createSelector(
-  [(state) => state.todoItems, (state) => state.filter],
-  (todoItems, filterStatus) => {
-    switch (filterStatus) {
-      case "All":
-        return todoItems;
-      case "Checked":
-        return todoItems.filter((item) => item.status === "checked");
-      case "Crossed":
-        return todoItems.filter((item) => item.status === "crossed");
-      default:
-        throw new Error("Unknown status: " + filterStatus);
-    }
-  }
-);
-
 export const {
   createTodoItem,
   updateTodoItemStatus,
