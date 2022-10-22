@@ -18,7 +18,7 @@ export const TodoContainer = styled.ul`
   flex-direction: column;
 `;
 export const HeadContent = styled.p`
-  padding: 2.9em 0 0 2.9em;
+  padding: 2.9em 0 0 2em;
   color: #434141;
   font-family: "Work Sans";
   font-style: italic;
@@ -41,7 +41,7 @@ export const StyleFilterPanel = styled.div`
   display: inline-flex;
   justify-content: space-around;
   width: 27em;
-  margin: 42em 0 0 6em;
+  margin: 41em 0 0 5em;
   & h2 {
     color: #434343;
     font-size: 20px;

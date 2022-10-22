@@ -26,9 +26,9 @@ export class TodoStoreImplement {
     this.todoItems.push(newItem);
   }
 
-  updateTodoItemStatus(id, checkStatus) {
+  updateTodoItemStatus({ itemId, itemStatus }) {
     const updatedItemStatus = this.todoItems.map((item) =>
-      item.id === id ? { ...item, status: checkStatus } : item
+      item.id === itemId ? { ...item, status: itemStatus } : item
     );
     this.todoItems = updatedItemStatus;
   }

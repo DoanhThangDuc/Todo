@@ -1,15 +1,14 @@
 import { useRef, useState } from "react";
-import { observer } from "mobx-react";
 import { StyledInputSection, MonitorBtn } from "./InputSection.styled";
 import PropTypes from "prop-types";
 
-const InputSection = observer(({ inputValues, todoStore }) => {
+function InputSection({ inputValues, onSubmitTodoContent }) {
   const [todoInput, setTodoInput] = useState("");
   const inputRef = useRef();
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    todoStore.onSubmitTodoContent(todoInput);
+    onSubmitTodoContent(todoInput);
     setTodoInput("");
     inputRef.current.focus();
   };
@@ -30,9 +29,9 @@ const InputSection = observer(({ inputValues, todoStore }) => {
       </MonitorBtn>
     </StyledInputSection>
   );
-});
-// InputSection.propTypes = {
-//   inputValues: PropTypes.string,
-//   onSubmitTodoContent: PropTypes.func,
-// };
+}
+InputSection.propTypes = {
+  inputValues: PropTypes.string,
+  onSubmitTodoContent: PropTypes.func,
+};
 export default InputSection;
