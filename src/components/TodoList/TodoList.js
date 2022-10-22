@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { observer } from "mobx-react";
 import TodoItem from "../TodoItem/TodoItem";
 import InputSection from "../InputSection/InputSection";
 import PropTypes from "prop-types";
+
 import {
   StyledTodoList,
   TodoContainer,
@@ -10,77 +11,7 @@ import {
   StyleFilterPanel,
 } from "./TodoList.styled";
 
-function TodoList({ itemValues }) {
-  const initialState = {
-    todoItems: [],
-    filter: "all",
-  };
-
-  const [state, setState] = useState(initialState);
-  const { todoItems } = state;
-
-  const filterTodoItems = (status) => {
-    switch (status) {
-      case "all":
-        return todoItems;
-      case "checked":
-        const checkedItems = todoItems.filter(
-          (item) => item.status === "checked"
-        );
-        return checkedItems;
-      case "crossed":
-        const crossedItems = todoItems.filter(
-          (item) => item.status === "crossed"
-        );
-        return crossedItems;
-    }
-  };
-
-  const getNextId = (todoInput) => {
-    return todoItems.length + todoInput.toString();
-  };
-
-  const createTodoItem = (itemValue) => {
-    setState({ ...state, todoItems: [...todoItems, itemValue] });
-  };
-
-  const onSubmitTodoContent = (todoInput) => {
-    const newItem = {
-      content: todoInput,
-      status: "unchecked",
-      id: getNextId(todoInput),
-      strikeThrough: false,
-    };
-    createTodoItem(newItem);
-  };
-
-  const updateTodoItemStatus = (id, checkStatus) => {
-    setState((current) => {
-      const updatedItemStatus = current.todoItems.map((item) =>
-        item.id === id ? { ...item, status: checkStatus } : item
-      );
-      return { ...current, todoItems: updatedItemStatus };
-    });
-  };
-
-  const handleUpdateStrikeThrough = (id) => {
-    setState((current) => {
-      const todoItem = current.todoItems.find((item) => item.id === id);
-      if (!todoItem) return;
-      if (todoItem.strikeThrough) {
-        const deletedItem = current.todoItems.filter((item) => item.id !== id);
-        return { ...current, todoItems: deletedItem };
-      }
-      const updatedItemsStrike = current.todoItems.map((item) => {
-        if (item.id === todoItem.id) {
-          return { ...item, strikeThrough: true };
-        }
-        return { ...item, strikeThrough: false };
-      });
-      return { ...current, todoItems: updatedItemsStrike };
-    });
-  };
-
+const TodoList = observer(({ itemValues, todoStore }) => {
   return (
     <StyledTodoList>
       <StyledList>
@@ -91,37 +22,39 @@ function TodoList({ itemValues }) {
               <TodoItem
                 key={item.id}
                 item={item}
-                updateTodoItemStatus={updateTodoItemStatus}
+                updateTodoItemStatus={() => {
+                  todoStore.updateTodoItemStatus();
+                }}
               ></TodoItem>
             ))}
-          {filterTodoItems(state.filter).map((item) => {
+          {todoStore.todoItemsFiltered.map((item) => {
             return (
               <TodoItem
                 key={item.id}
+                todoStore={todoStore}
                 item={item}
-                updateTodoItemStatus={updateTodoItemStatus}
-                onContentClick={handleUpdateStrikeThrough}
               ></TodoItem>
             );
           })}
         </TodoContainer>
-        <InputSection onSubmitTodoContent={onSubmitTodoContent}></InputSection>
+        <InputSection todoStore={todoStore}></InputSection>
         <StyleFilterPanel>
           <h2>Show:</h2>
-          <button onClick={() => setState({ ...state, filter: "all" })}>
+          <button onClick={() => todoStore.updateFilterStatus("all")}>
             All
           </button>
-          <button onClick={() => setState({ ...state, filter: "checked" })}>
+          <button onClick={() => todoStore.updateFilterStatus("checked")}>
             Checked
           </button>
-          <button onClick={() => setState({ ...state, filter: "crossed" })}>
+          <button onClick={() => todoStore.updateFilterStatus("crossed")}>
             Crossed
           </button>
         </StyleFilterPanel>
       </StyledList>
     </StyledTodoList>
   );
-}
+});
+
 TodoList.propTypes = {
   itemValues: PropTypes.shape({
     content: PropTypes.string.isRequired,

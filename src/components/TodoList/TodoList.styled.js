@@ -38,11 +38,10 @@ export const InputBtn = styled.button`
 `;
 export const StyleFilterPanel = styled.div`
   position: absolute;
-  /* z-index: 1; */
   display: inline-flex;
   justify-content: space-around;
   width: 27em;
-  margin: 49em 0 0 8.5em;
+  margin: 42em 0 0 6em;
   & h2 {
     color: #434343;
     font-size: 20px;

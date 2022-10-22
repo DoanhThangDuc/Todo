@@ -3,11 +3,11 @@ import Logo from "../Logo/Logo";
 import { StyledTodo } from "./TodoBoard.styled";
 import PropTypes from "prop-types";
 
-function TodoBoard({ itemValues }) {
+function TodoBoard({ itemValues, todoStore }) {
   return (
     <StyledTodo>
       <Logo></Logo>
-      <TodoList itemValues={itemValues}></TodoList>
+      <TodoList itemValues={itemValues} todoStore={todoStore}></TodoList>
     </StyledTodo>
   );
 }

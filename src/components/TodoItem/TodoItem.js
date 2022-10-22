@@ -1,9 +1,9 @@
-import { memo } from "react";
+import { observer } from "mobx-react";
 import { Item, Icons, Content } from "./TodoItem.styled";
 import TodoCheckbox from "../TodoCheckbox/TodoCheckbox";
 import PropTypes from "prop-types";
 
-function TodoItem({ item, updateTodoItemStatus, onContentClick }) {
+const TodoItem = observer(({ item, todoStore }) => {
   const handleCheckStatus = () => {
     let itemStatus;
     switch (item.status) {
@@ -20,7 +20,7 @@ function TodoItem({ item, updateTodoItemStatus, onContentClick }) {
         itemStatus = "unchecked";
         break;
     }
-    updateTodoItemStatus(item.id, itemStatus);
+    todoStore.updateTodoItemStatus(item.id, itemStatus);
   };
 
   return (
@@ -29,14 +29,14 @@ function TodoItem({ item, updateTodoItemStatus, onContentClick }) {
         <TodoCheckbox checkStatus={item.status}></TodoCheckbox>
       </Icons>
       <Content
-        onClick={() => onContentClick(item.id)}
+        onClick={() => todoStore.handleUpdateStrikeThrough(item.id)}
         lineThrough={item.strikeThrough}
       >
         {item.content}
       </Content>
     </Item>
   );
-}
+});
 
 TodoItem.propTypes = {
   item: PropTypes.shape({
@@ -45,4 +45,4 @@ TodoItem.propTypes = {
     id: PropTypes.string.isRequired,
   }),
 };
-export default memo(TodoItem);
+export default (TodoItem);
