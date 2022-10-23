@@ -1,6 +1,6 @@
 import GlobalStyles from "./shared/Global.styled";
 import { ThemeProvider } from "styled-components";
-import { TodoStore } from "./store";
+import { todoStore } from "./store";
 import TodoBoardContainer from "./containers/TodoBoardContainer";
 export const theme = {
   colors: {
@@ -16,7 +16,7 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyles></GlobalStyles>
-      <TodoBoardContainer todoStore={TodoStore} />
+      <TodoBoardContainer todoStore={todoStore} />
     </ThemeProvider>
   );
 }

@@ -1,22 +1,14 @@
-import { makeObservable, observable, action, computed } from "mobx";
+import { makeAutoObservable } from "mobx";
 
 export class TodoStoreImplement {
   todoItems = [];
   filter = "all";
 
-  constructor() {
-    makeObservable(this, {
-      todoItems: observable,
-      filter: observable,
-      onSubmitTodoContent: action,
-      updateTodoItemStatus: action,
-      handleUpdateStrikeThrough: action,
-      updateFilterStatus: action,
-      todoItemsFiltered: computed,
-    });
+  constructor(arg) {
+    makeAutoObservable(this);
   }
 
-  onSubmitTodoContent(todoInput) {
+  onSubmitTodoContent = (todoInput) => {
     const newItem = {
       content: todoInput,
       status: "unchecked",
@@ -24,36 +16,44 @@ export class TodoStoreImplement {
       strikeThrough: false,
     };
     this.todoItems.push(newItem);
-  }
+  };
 
-  updateTodoItemStatus({ itemId, itemStatus }) {
-    const updatedItemStatus = this.todoItems.map((item) =>
-      item.id === itemId ? { ...item, status: itemStatus } : item
-    );
-    this.todoItems = updatedItemStatus;
-  }
+  updateTodoItemStatus = ({ itemId, itemStatus }) => {
+    const todoItemId = this.todoItems.findIndex((item) => item.id === itemId);
+    if (todoItemId <= -1 && !itemStatus) return;
+    this.todoItems[todoItemId] = {
+      ...this.todoItems[todoItemId],
+      status: itemStatus,
+    };
+  };
 
-  handleUpdateStrikeThrough(id) {
-    const todoItem = this.todoItems.find((item) => item.id === id);
-    if (!todoItem) return;
-    if (todoItem.strikeThrough) {
-      const deletedItem = this.todoItems.filter((item) => item.id !== id);
-      this.todoItems = deletedItem;
+  handleUpdateStrikeThrough = (id) => {
+    if (!id) return;
+    const todoItemId = this.todoItems.findIndex((item) => item.id === id);
+    if (this.todoItems[todoItemId].strikeThrough === true) {
+      this.todoItems.splice(todoItemId, 1);
       return;
     }
-    const updatedItemsStrike = this.todoItems.map((item) => {
-      if (item.id === todoItem.id) {
-        return { ...item, strikeThrough: true };
-      }
-      return { ...item, strikeThrough: false };
-    });
-    this.todoItems = updatedItemsStrike;
-    return;
-  }
 
-  updateFilterStatus(status) {
+    const idItemHasStrikeThrough = this.todoItems.findIndex(
+      (item) => item.strikeThrough === true
+    );
+    if (idItemHasStrikeThrough > -1) {
+      this.todoItems[idItemHasStrikeThrough] = {
+        ...this.todoItems[idItemHasStrikeThrough],
+        strikeThrough: false,
+      };
+    }
+
+    this.todoItems[todoItemId] = {
+      ...this.todoItems[todoItemId],
+      strikeThrough: true,
+    };
+  };
+
+  updateFilterStatus = (status) => {
     this.filter = status;
-  }
+  };
 
   get todoItemsFiltered() {
     const itemsFiltered = this.todoItems.filter(
@@ -63,4 +63,4 @@ export class TodoStoreImplement {
   }
 }
 
-export const TodoStore = new TodoStoreImplement();
+export const todoStore = new TodoStoreImplement();
