@@ -1,3 +1,4 @@
+import { observer } from "mobx-react-lite";
 import Logo from "../Logo/Logo";
 import { StyledTodo } from "./TodoBoard.styled";
 import TodoList from "../TodoList/TodoList";
@@ -27,4 +28,4 @@ function TodoBoard({
   );
 }
 
-export default TodoBoard;
+export default observer(TodoBoard);

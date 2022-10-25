@@ -1,4 +1,4 @@
-import { memo } from "react";
+import { observer } from "mobx-react-lite";
 import { Item, Icons, Content } from "./TodoItem.styled";
 import TodoCheckbox from "../TodoCheckbox/TodoCheckbox";
 import PropTypes from "prop-types";
@@ -46,4 +46,4 @@ TodoItem.propTypes = {
     id: PropTypes.string.isRequired,
   }),
 };
-export default memo(TodoItem);
+export default observer(TodoItem);

@@ -1,3 +1,4 @@
+import { observer } from "mobx-react-lite";
 import TodoItem from "../TodoItem/TodoItem";
 import InputSection from "../InputSection/InputSection";
 import PropTypes from "prop-types";
@@ -60,4 +61,4 @@ TodoList.propTypes = {
     id: PropTypes.string.isRequired,
   }),
 };
-export default TodoList;
+export default observer(TodoList);
