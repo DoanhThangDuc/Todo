@@ -1,23 +1,31 @@
-import TodoList from "../TodoList/TodoList";
+import { observer } from "mobx-react-lite";
 import Logo from "../Logo/Logo";
 import { StyledTodo } from "./TodoBoard.styled";
-import PropTypes from "prop-types";
+import TodoList from "../TodoList/TodoList";
 
-function TodoBoard({ itemValues }) {
+function TodoBoard({
+  todoItems,
+  createTodoItem,
+  updateTodoItemStatus,
+  handleUpdateStrikeThrough,
+  filterStatus,
+  filterTodoItems,
+  visibleTodoItems,
+}) {
   return (
     <StyledTodo>
-      <Logo></Logo>
-      <TodoList itemValues={itemValues}></TodoList>
+      <Logo />
+      <TodoList
+        todoItems={todoItems}
+        createTodoItem={createTodoItem}
+        updateTodoItemStatus={updateTodoItemStatus}
+        handleUpdateStrikeThrough={handleUpdateStrikeThrough}
+        filterStatus={filterStatus}
+        filterTodoItems={filterTodoItems}
+        visibleTodoItems={visibleTodoItems}
+      />
     </StyledTodo>
   );
 }
-TodoBoard.propTypes = {
-  itemValues: PropTypes.shape({
-    content: PropTypes.string.isRequired,
-    status: PropTypes.string.isRequired,
-    id: PropTypes.string.isRequired,
-    strikeThrough: PropTypes.bool.isRequired,
-  }),
-};
 
-export default TodoBoard;
+export default observer(TodoBoard);

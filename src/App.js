@@ -1,6 +1,7 @@
-import TodoBoard from "./components/Todo/TodoBoard";
 import GlobalStyles from "./shared/Global.styled";
 import { ThemeProvider } from "styled-components";
+import { todoStore } from "./store";
+import TodoBoardContainer from "./containers/TodoBoardContainer";
 export const theme = {
   colors: {
     header: "#edfbff",
@@ -15,7 +16,7 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyles></GlobalStyles>
-      <TodoBoard></TodoBoard>;
+      <TodoBoardContainer todoStore={todoStore} />
     </ThemeProvider>
   );
 }

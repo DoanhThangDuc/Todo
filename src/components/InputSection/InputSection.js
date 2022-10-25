@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 import { StyledInputSection, MonitorBtn } from "./InputSection.styled";
 import PropTypes from "prop-types";
+
 function InputSection({ inputValues, onSubmitTodoContent }) {
   const [todoInput, setTodoInput] = useState("");
   const inputRef = useRef();

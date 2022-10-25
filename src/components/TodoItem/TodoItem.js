@@ -1,4 +1,4 @@
-import { memo } from "react";
+import { observer } from "mobx-react-lite";
 import { Item, Icons, Content } from "./TodoItem.styled";
 import TodoCheckbox from "../TodoCheckbox/TodoCheckbox";
 import PropTypes from "prop-types";
@@ -20,7 +20,8 @@ function TodoItem({ item, updateTodoItemStatus, onContentClick }) {
         itemStatus = "unchecked";
         break;
     }
-    updateTodoItemStatus(item.id, itemStatus);
+    const itemId = item.id;
+    updateTodoItemStatus({ itemId, itemStatus });
   };
 
   return (
@@ -45,4 +46,4 @@ TodoItem.propTypes = {
     id: PropTypes.string.isRequired,
   }),
 };
-export default memo(TodoItem);
+export default observer(TodoItem);
