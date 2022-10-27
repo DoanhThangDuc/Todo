@@ -1,7 +1,7 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import TodoItem from "../TodoItem/TodoItem";
 import InputSection from "../InputSection/InputSection";
-import PropTypes from "prop-types";
+
 import {
   StyledTodoList,
   TodoContainer,
@@ -9,69 +9,78 @@ import {
   HeadContent,
   StyleFilterPanel,
 } from "./TodoList.styled";
+import { ItemValues } from "../Todo/TodoBoard";
 
-function TodoList({ itemValues }) {
+interface State {
+  todoItems: ItemValues[];
+  filter: string;
+}
+
+const TodoList: React.FC<{}> = () => {
   const initialState = {
     todoItems: [],
     filter: "all",
   };
 
-  const [state, setState] = useState(initialState);
+  const [state, setState] = useState<State>(initialState);
   const { todoItems } = state;
 
-  const filterTodoItems = (status) => {
+  const filterTodoItems = (status: string | undefined) => {
     switch (status) {
-      case "all":
-        return todoItems;
       case "checked":
         const checkedItems = todoItems.filter(
-          (item) => item.status === "checked"
+          (item: ItemValues) => item.status === "checked"
         );
         return checkedItems;
       case "crossed":
         const crossedItems = todoItems.filter(
-          (item) => item.status === "crossed"
+          (item: ItemValues) => item.status === "crossed"
         );
         return crossedItems;
+      default:
+        return todoItems;
     }
   };
 
-  const getNextId = (todoInput) => {
-    return todoItems.length + todoInput.toString();
-  };
-
-  const createTodoItem = (itemValue) => {
+  const createTodoItem = (itemValue: ItemValues) => {
     setState({ ...state, todoItems: [...todoItems, itemValue] });
   };
 
-  const onSubmitTodoContent = (todoInput) => {
+  const onSubmitTodoContent = (todoInput: string) => {
     const newItem = {
       content: todoInput,
       status: "unchecked",
-      id: getNextId(todoInput),
+      id: todoInput,
       strikeThrough: false,
     };
     createTodoItem(newItem);
   };
 
-  const updateTodoItemStatus = (id, checkStatus) => {
+  const updateTodoItemStatus = (id: string, checkStatus: string) => {
     setState((current) => {
-      const updatedItemStatus = current.todoItems.map((item) =>
+      const updatedItemStatus = current.todoItems.map((item: ItemValues) =>
         item.id === id ? { ...item, status: checkStatus } : item
       );
       return { ...current, todoItems: updatedItemStatus };
     });
   };
 
-  const handleUpdateStrikeThrough = (id) => {
+  const handleUpdateStrikeThrough = (id: string) => {
     setState((current) => {
-      const todoItem = current.todoItems.find((item) => item.id === id);
-      if (!todoItem) return;
+      if (!id) return current;
+      const todoItem = current.todoItems.find(
+        (item: ItemValues) => item.id === id
+      );
+
+      if (!todoItem) return current;
+
       if (todoItem.strikeThrough) {
-        const deletedItem = current.todoItems.filter((item) => item.id !== id);
+        const deletedItem = current.todoItems.filter(
+          (item: ItemValues) => item.id !== id
+        );
         return { ...current, todoItems: deletedItem };
       }
-      const updatedItemsStrike = current.todoItems.map((item) => {
+      const updatedItemsStrike = current.todoItems.map((item: ItemValues) => {
         if (item.id === todoItem.id) {
           return { ...item, strikeThrough: true };
         }
@@ -86,15 +95,7 @@ function TodoList({ itemValues }) {
       <StyledList>
         <HeadContent>Check List</HeadContent>
         <TodoContainer>
-          {itemValues != undefined &&
-            itemValues.map((item) => (
-              <TodoItem
-                key={item.id}
-                item={item}
-                updateTodoItemStatus={updateTodoItemStatus}
-              ></TodoItem>
-            ))}
-          {filterTodoItems(state.filter).map((item) => {
+          {filterTodoItems(state.filter).map((item: ItemValues) => {
             return (
               <TodoItem
                 key={item.id}
@@ -121,12 +122,6 @@ function TodoList({ itemValues }) {
       </StyledList>
     </StyledTodoList>
   );
-}
-TodoList.propTypes = {
-  itemValues: PropTypes.shape({
-    content: PropTypes.string.isRequired,
-    status: PropTypes.string.isRequired,
-    id: PropTypes.string.isRequired,
-  }),
 };
+
 export default TodoList;

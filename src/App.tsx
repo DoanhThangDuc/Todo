@@ -1,3 +1,4 @@
+import React from "react";
 import TodoBoard from "./components/Todo/TodoBoard";
 import GlobalStyles from "./shared/Global.styled";
 import { ThemeProvider } from "styled-components";
@@ -11,13 +12,13 @@ export const theme = {
   tablet: "63.9375em",
 };
 
-function App() {
+const App: React.FC = () => {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyles></GlobalStyles>
       <TodoBoard></TodoBoard>;
     </ThemeProvider>
   );
-}
+};
 
 export default App;
