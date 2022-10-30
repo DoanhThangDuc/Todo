@@ -9,32 +9,31 @@ import {
   HeadContent,
   StyleFilterPanel,
 } from "./TodoList.styled";
-import { ItemValues } from "../Todo/TodoBoard";
+import { TodoItemType } from "../Todo/TodoBoard";
 
-interface State {
-  todoItems: ItemValues[];
-  filter: string;
-}
-
-const TodoList: React.FC<{}> = () => {
+const TodoList: React.FC<{ items?: TodoItemType[] }> = ({ items }) => {
   const initialState = {
     todoItems: [],
     filter: "all",
   };
 
-  const [state, setState] = useState<State>(initialState);
+  const [state, setState] =
+    useState<{
+      todoItems: TodoItemType[];
+      filter: string;
+    }>(initialState);
   const { todoItems } = state;
 
   const filterTodoItems = (status: string | undefined) => {
     switch (status) {
       case "checked":
         const checkedItems = todoItems.filter(
-          (item: ItemValues) => item.status === "checked"
+          (item: TodoItemType) => item.status === "checked"
         );
         return checkedItems;
       case "crossed":
         const crossedItems = todoItems.filter(
-          (item: ItemValues) => item.status === "crossed"
+          (item: TodoItemType) => item.status === "crossed"
         );
         return crossedItems;
       default:
@@ -42,7 +41,7 @@ const TodoList: React.FC<{}> = () => {
     }
   };
 
-  const createTodoItem = (itemValue: ItemValues) => {
+  const createTodoItem = (itemValue: TodoItemType) => {
     setState({ ...state, todoItems: [...todoItems, itemValue] });
   };
 
@@ -58,7 +57,7 @@ const TodoList: React.FC<{}> = () => {
 
   const updateTodoItemStatus = (id: string, checkStatus: string) => {
     setState((current) => {
-      const updatedItemStatus = current.todoItems.map((item: ItemValues) =>
+      const updatedItemStatus = current.todoItems.map((item: TodoItemType) =>
         item.id === id ? { ...item, status: checkStatus } : item
       );
       return { ...current, todoItems: updatedItemStatus };
@@ -69,18 +68,18 @@ const TodoList: React.FC<{}> = () => {
     setState((current) => {
       if (!id) return current;
       const todoItem = current.todoItems.find(
-        (item: ItemValues) => item.id === id
+        (item: TodoItemType) => item.id === id
       );
 
       if (!todoItem) return current;
 
       if (todoItem.strikeThrough) {
         const deletedItem = current.todoItems.filter(
-          (item: ItemValues) => item.id !== id
+          (item: TodoItemType) => item.id !== id
         );
         return { ...current, todoItems: deletedItem };
       }
-      const updatedItemsStrike = current.todoItems.map((item: ItemValues) => {
+      const updatedItemsStrike = current.todoItems.map((item: TodoItemType) => {
         if (item.id === todoItem.id) {
           return { ...item, strikeThrough: true };
         }
@@ -95,24 +94,42 @@ const TodoList: React.FC<{}> = () => {
       <StyledList>
         <HeadContent>Check List</HeadContent>
         <TodoContainer>
-          {filterTodoItems(state.filter).map((item: ItemValues) => {
+          {items &&
+            items.map((item: TodoItemType) => {
+              return (
+                <TodoItem
+                  key={item.id}
+                  item={item}
+                  updateTodoItemStatus={updateTodoItemStatus}
+                  onContentClick={handleUpdateStrikeThrough}
+                />
+              );
+            })}
+          {filterTodoItems(state.filter).map((item: TodoItemType) => {
             return (
               <TodoItem
                 key={item.id}
                 item={item}
                 updateTodoItemStatus={updateTodoItemStatus}
                 onContentClick={handleUpdateStrikeThrough}
-              ></TodoItem>
+              />
             );
           })}
         </TodoContainer>
-        <InputSection onSubmitTodoContent={onSubmitTodoContent}></InputSection>
+        <InputSection
+          initialInput=""
+          onSubmitTodoContent={onSubmitTodoContent}
+        />
         <StyleFilterPanel>
           <h2>Show:</h2>
           <button onClick={() => setState({ ...state, filter: "all" })}>
             All
           </button>
-          <button onClick={() => setState({ ...state, filter: "checked" })}>
+          <button
+            onClick={() =>
+              setState((prevState) => ({ ...prevState, filter: "checked" }))
+            }
+          >
             Checked
           </button>
           <button onClick={() => setState({ ...state, filter: "crossed" })}>

@@ -1,11 +1,5 @@
 import styled, { css } from "styled-components";
 
-
-interface Props {
-  background?: string;
-  lineThrough: boolean;
-}
-
 export const Item = styled.li`
   display: inline-flex;
   align-items: center;
@@ -22,7 +16,10 @@ const strikeThrough = `
   color: #7e7171;
   text-decoration: line-through;
 `;
-export const Content = styled.p<Props>`
+export const Content = styled.p<{
+  background?: string;
+  lineThrough: boolean;
+}>`
   background-color: ${(props) => props.background || "inherit"};
   ${(props) =>
     props.lineThrough

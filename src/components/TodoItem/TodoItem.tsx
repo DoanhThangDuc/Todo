@@ -1,18 +1,13 @@
 import React from "react";
 import { Item, Icons, Content } from "./TodoItem.styled";
 import TodoCheckbox from "../TodoCheckbox/TodoCheckbox";
-import { ItemValues } from "../Todo/TodoBoard";
+import { TodoItemType } from "../Todo/TodoBoard";
 
-interface TodoItemProps {
-  item: ItemValues;
+const TodoItem: React.FC<{
+  item: TodoItemType;
   updateTodoItemStatus: (id: string, status: string) => void;
   onContentClick: (id: string) => void;
-}
-const TodoItem: React.FC<TodoItemProps> = ({
-  item,
-  updateTodoItemStatus,
-  onContentClick,
-}) => {
+}> = ({ item, updateTodoItemStatus, onContentClick }) => {
   const handleCheckStatus = () => {
     let itemStatus;
     switch (item.status) {
