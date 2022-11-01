@@ -3,9 +3,8 @@ import { StyledInputSection, MonitorBtn } from "./InputSection.styled";
 
 const InputSection: React.FC<{
   onSubmitTodoContent: (todoInput: string) => void;
-  initialInput: string;
-}> = ({ onSubmitTodoContent, initialInput = "" }) => {
-  const [todoInput, setTodoInput] = useState(initialInput);
+}> = ({ onSubmitTodoContent }) => {
+  const [todoInput, setTodoInput] = useState("");
   const inputRef = useRef<HTMLInputElement | null>(null);
 
   const handleFormSubmit: React.FormEventHandler = (e: React.ChangeEvent) => {

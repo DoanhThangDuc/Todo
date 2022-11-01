@@ -1,7 +1,7 @@
 import React from "react";
 import { Meta, Story } from "@storybook/react";
 import TodoItem from "./TodoItem";
-import { TodoItemType } from "../Todo/TodoBoard";
+import { TodoItemModel } from "../../App";
 
 export default {
   component: TodoItem,
@@ -9,7 +9,7 @@ export default {
 } as Meta;
 
 const Template: Story<{
-  item: TodoItemType;
+  item: TodoItemModel;
   updateTodoItemStatus: (id: string, status: string) => void;
   onContentClick: (id: string) => void;
 }> = (args) => <TodoItem {...args} />;

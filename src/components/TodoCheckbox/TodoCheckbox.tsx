@@ -2,7 +2,11 @@ import React from "react";
 import { TickIcon, CrossIcon, IconsContainer } from "./TodoCheckbox.styled";
 import { ChatIcon } from "./TodoCheckbox.styled";
 
-function TodoCheckbox({ checkStatus }: { checkStatus: string }) {
+function TodoCheckbox({
+  checkStatus,
+}: {
+  checkStatus: "unchecked" | "checked" | "crossed";
+}) {
   return (
     <IconsContainer>
       <ChatIcon size="2.5rem" />

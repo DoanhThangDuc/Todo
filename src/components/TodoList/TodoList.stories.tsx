@@ -1,14 +1,16 @@
 import React from "react";
 import { Meta, Story } from "@storybook/react";
+import { ComponentProps } from "react";
 import TodoList from "./TodoList";
-import { TodoItemType } from "../Todo/TodoBoard";
+
+type TodoListProps = ComponentProps<typeof TodoList>;
 
 export default {
   component: TodoList,
   title: "Todo List",
-} as Meta;
+} as Meta<TodoListProps>;
 
-const Template: Story<{ items: TodoItemType[] }> = (args) => (
+const Template: Story<TodoListProps> = (args) => (
   <TodoList {...args}></TodoList>
 );
 
@@ -16,7 +18,7 @@ export const Default = Template.bind({});
 
 export const AddMoreItems = Template.bind({});
 AddMoreItems.args = {
-  items: [
+  todoItems: [
     {
       content: "todoInput",
       status: "unchecked",

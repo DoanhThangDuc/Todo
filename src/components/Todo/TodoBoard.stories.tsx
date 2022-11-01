@@ -1,21 +1,24 @@
-import React from "react";
+import { ComponentProps } from "react";
 import { Meta, Story } from "@storybook/react";
 import TodoBoard from "./TodoBoard";
-import { TodoItemType } from "./TodoBoard";
+
+type TodoBoardProps = ComponentProps<typeof TodoBoard>;
 
 export default {
   component: TodoBoard,
   title: "Todo Board",
-} as Meta;
+} as Meta<TodoBoardProps>;
 
-const Template: Story<{ items: TodoItemType[] }> = (args) => (
+const Template: Story<TodoBoardProps> = (args) => (
   <TodoBoard {...args} />
 );
 
 export const Default = Template.bind({});
+
 export const InputItems = Template.bind({});
+
 InputItems.args = {
-  items: [
+  todoItems: [
     {
       content: "todoInput",
       status: "unchecked",
@@ -36,9 +39,10 @@ InputItems.args = {
     },
   ],
 };
+
 export const strikeThrough = Template.bind({});
 strikeThrough.args = {
-  items: [
+  todoItems: [
     {
       content: "todoInput",
       status: "unchecked",

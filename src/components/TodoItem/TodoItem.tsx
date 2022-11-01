@@ -1,15 +1,18 @@
 import React from "react";
 import { Item, Icons, Content } from "./TodoItem.styled";
 import TodoCheckbox from "../TodoCheckbox/TodoCheckbox";
-import { TodoItemType } from "../Todo/TodoBoard";
+import { TodoItemModel } from "../../App";
 
 const TodoItem: React.FC<{
-  item: TodoItemType;
-  updateTodoItemStatus: (id: string, status: string) => void;
+  item: TodoItemModel;
+  updateTodoItemStatus: (
+    id: string,
+    status: "unchecked" | "checked" | "crossed"
+  ) => void;
   onContentClick: (id: string) => void;
 }> = ({ item, updateTodoItemStatus, onContentClick }) => {
   const handleCheckStatus = () => {
-    let itemStatus;
+    let itemStatus: "unchecked" | "checked" | "crossed";
     switch (item.status) {
       case "unchecked":
         itemStatus = "checked";
@@ -30,7 +33,7 @@ const TodoItem: React.FC<{
   return (
     <Item>
       <Icons onClick={handleCheckStatus}>
-        <TodoCheckbox checkStatus={item.status}></TodoCheckbox>
+        <TodoCheckbox checkStatus={item.status} />
       </Icons>
       <Content
         onClick={() => onContentClick(item.id)}
