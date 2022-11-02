@@ -2,26 +2,23 @@ import React from "react";
 import TodoList from "../TodoList/TodoList";
 import Logo from "../Logo/Logo";
 import { StyledTodo } from "./TodoBoard.styled";
-import { TodoItemModel } from "../../App";
+import { TodoItemModel, Status } from "../../App";
 
-export interface ControlModal {
+export interface TodoBoardProps {
   todoItems: TodoItemModel[];
-  filterTodoItems: (status: "unchecked" | "checked" | "crossed") => void;
+  filterTodoItems: (status: Status) => void;
   onSubmitTodoContent: (todoInput: string) => void;
-  updateTodoItemStatus: (
-    id: string,
-    checkStatus: "unchecked" | "checked" | "crossed"
-  ) => void;
+  updateTodoItemStatus: (id: string, checkStatus: Status) => void;
   handleUpdateStrikeThrough: (id: string) => void;
-  onClickFilter: (filter: "unchecked" | "checked" | "crossed") => void;
+  onClickFilter: (filter: Status) => void;
 }
-const TodoBoard: React.FC<ControlModal> = ({
+const TodoBoard: React.FC<TodoBoardProps> = ({
   todoItems,
   filterTodoItems,
   onSubmitTodoContent,
   updateTodoItemStatus,
   handleUpdateStrikeThrough,
-  onClickFilter
+  onClickFilter,
 }) => {
   return (
     <StyledTodo>

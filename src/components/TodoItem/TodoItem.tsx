@@ -2,17 +2,15 @@ import React from "react";
 import { Item, Icons, Content } from "./TodoItem.styled";
 import TodoCheckbox from "../TodoCheckbox/TodoCheckbox";
 import { TodoItemModel } from "../../App";
+import { Status } from "../../App";
 
 const TodoItem: React.FC<{
   item: TodoItemModel;
-  updateTodoItemStatus: (
-    id: string,
-    status: "unchecked" | "checked" | "crossed"
-  ) => void;
+  updateTodoItemStatus: (id: string, status: Status) => void;
   onContentClick: (id: string) => void;
 }> = ({ item, updateTodoItemStatus, onContentClick }) => {
   const handleCheckStatus = () => {
-    let itemStatus: "unchecked" | "checked" | "crossed";
+    let itemStatus: Status;
     switch (item.status) {
       case "unchecked":
         itemStatus = "checked";

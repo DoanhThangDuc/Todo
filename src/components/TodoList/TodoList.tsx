@@ -1,7 +1,7 @@
 import React from "react";
 import TodoItem from "../TodoItem/TodoItem";
 import InputSection from "../InputSection/InputSection";
-import { ControlModal } from "../Todo/TodoBoard";
+import { TodoBoardProps } from "../Todo/TodoBoard";
 
 import {
   StyledTodoList,
@@ -12,7 +12,7 @@ import {
 } from "./TodoList.styled";
 import { TodoItemModel } from "../../App";
 
-const TodoList: React.FC<ControlModal> = ({
+const TodoList: React.FC<TodoBoardProps> = ({
   todoItems = [],
   onSubmitTodoContent,
   updateTodoItemStatus,

@@ -13,16 +13,18 @@ export const theme = {
   tablet: "63.9375em",
 };
 
+export type Status = "unchecked" | "checked" | "crossed";
+
 export interface TodoItemModel {
   content: string;
-  status: "unchecked" | "checked" | "crossed";
+  status: Status;
   id: string;
   strikeThrough: boolean;
 }
 
 interface State {
   todoItems: TodoItemModel[];
-  filter: "unchecked" | "checked" | "crossed";
+  filter: Status;
 }
 const App: React.FC = () => {
   const initialState: State = {
@@ -34,7 +36,7 @@ const App: React.FC = () => {
 
   const { todoItems, filter } = state;
 
-  const filterTodoItems = (status: "unchecked" | "checked" | "crossed") => {
+  const filterTodoItems = (status: Status) => {
     switch (status) {
       case "checked":
         const checkedItems = todoItems.filter(
@@ -63,7 +65,7 @@ const App: React.FC = () => {
 
   const updateTodoItemStatus = (
     id: string,
-    checkStatus: "unchecked" | "checked" | "crossed"
+    checkStatus: Status,
   ) => {
     setState((current) => {
       const updatedItemStatus = current.todoItems.map((item: TodoItemModel) =>
