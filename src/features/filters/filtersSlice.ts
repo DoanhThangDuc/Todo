@@ -1,10 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
-
-const initialState = "All";
+import { Status } from "../../App"
 
 export const filtersSlice = createSlice({
   name: "filter",
-  initialState: initialState,
+  initialState: 'unchecked' as Status,
   reducers: {
     filterTodoItems: (state, action) => {
       return (state = action.payload);

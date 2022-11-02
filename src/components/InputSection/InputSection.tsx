@@ -1,23 +1,26 @@
-import { useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { StyledInputSection, MonitorBtn } from "./InputSection.styled";
-import PropTypes from "prop-types";
+import { TodoItemModel } from "../../App";
 
-function InputSection({ inputValues, onSubmitTodoContent }) {
-  const [todoInput, setTodoInput] = useState("");
-  const inputRef = useRef();
+const InputSection: React.FC<{
+  initialInput: string
+  onSubmitTodoContent: (todoInput: string) => TodoItemModel;
+}> = ({ onSubmitTodoContent, initialInput }) => {
+  const [todoInput, setTodoInput] = useState(initialInput);
+  const inputRef = useRef<HTMLInputElement | null>(null);
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit: React.FormEventHandler = (e: React.ChangeEvent) => {
     e.preventDefault();
     onSubmitTodoContent(todoInput);
     setTodoInput("");
-    inputRef.current.focus();
+    inputRef.current?.focus();
   };
 
   return (
     <StyledInputSection onSubmit={handleFormSubmit}>
       <input
         ref={inputRef}
-        value={inputValues ? inputValues : todoInput}
+        value={todoInput}
         placeholder="enter task"
         onChange={(e) => {
           setTodoInput(e.target.value);
@@ -29,9 +32,6 @@ function InputSection({ inputValues, onSubmitTodoContent }) {
       </MonitorBtn>
     </StyledInputSection>
   );
-}
-InputSection.propTypes = {
-  inputValues: PropTypes.string,
-  onSubmitTodoContent: PropTypes.func,
 };
+
 export default InputSection;

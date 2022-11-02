@@ -1,35 +1,29 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { createSelector } from "reselect";
-
-const initialState = [];
-
-// function nextTodoId(state) {
-//   const maxId = state.reduce((maxId, todo) => Math.max(todo.id, maxId), -1);
-//   return maxId + 1;
-// }
+import { createSlice, nanoid, PayloadAction } from "@reduxjs/toolkit";
+import { TodoItemModel, Status } from "../../App";
 
 export const todosSlice = createSlice({
   name: "todoItems",
-  initialState: initialState,
+  initialState: [] as TodoItemModel[],
   reducers: {
-    createTodoItem: {
-      reducer(state, action) {
+    addTodoItem: {
+      reducer: (state, action: PayloadAction<TodoItemModel>) => {
         const newItem = action.payload;
         return [...state, { ...newItem }];
       },
-      prepare(payload) {
+      prepare(content: string) {
+        const id = nanoid()
         return {
           payload: {
-            content: payload,
-            status: "unchecked",
-            id: payload,
+            content: content,
+            status: "unchecked" as Status,
+            id: id,
             strikeThrough: false,
           },
         };
       },
     },
 
-    updateTodoItemStatus(state, action) {
+    setTodoItemStatus(state, action) {
       const updatedItemStatus = state.map((item) =>
         item.id === action.payload.itemId
           ? { ...item, status: action.payload.itemStatus }
@@ -38,7 +32,7 @@ export const todosSlice = createSlice({
       return [...updatedItemStatus];
     },
 
-    handleUpdateStrikeThrough(state, action) {
+    setStrikeThrough(state, action) {
       const todoItem = state.find((item) => item.id === action.payload);
       if (!todoItem) return state;
       if (todoItem.strikeThrough) {
@@ -57,9 +51,9 @@ export const todosSlice = createSlice({
 });
 
 export const {
-  createTodoItem,
-  updateTodoItemStatus,
-  handleUpdateStrikeThrough,
+  addTodoItem,
+  setTodoItemStatus,
+  setStrikeThrough,
 } = todosSlice.actions;
 
 export default todosSlice.reducer;
