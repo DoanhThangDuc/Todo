@@ -16,7 +16,10 @@ const strikeThrough = `
   color: #7e7171;
   text-decoration: line-through;
 `;
-export const Content = styled.p`
+export const Content = styled.p<{
+  background?: string;
+  lineThrough: boolean;
+}>`
   background-color: ${(props) => props.background || "inherit"};
   ${(props) =>
     props.lineThrough

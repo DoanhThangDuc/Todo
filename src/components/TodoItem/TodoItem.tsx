@@ -1,11 +1,16 @@
-import { memo } from "react";
+import React from "react";
 import { Item, Icons, Content } from "./TodoItem.styled";
 import TodoCheckbox from "../TodoCheckbox/TodoCheckbox";
-import PropTypes from "prop-types";
+import { TodoItemModel } from "../../App";
+import { Status } from "../../App";
 
-function TodoItem({ item, updateTodoItemStatus, onContentClick }) {
+const TodoItem: React.FC<{
+  item: TodoItemModel;
+  updateTodoItemStatus: (id: string, status: Status) => void;
+  onContentClick: (id: string) => void;
+}> = ({ item, updateTodoItemStatus, onContentClick }) => {
   const handleCheckStatus = () => {
-    let itemStatus;
+    let itemStatus: Status;
     switch (item.status) {
       case "unchecked":
         itemStatus = "checked";
@@ -26,7 +31,7 @@ function TodoItem({ item, updateTodoItemStatus, onContentClick }) {
   return (
     <Item>
       <Icons onClick={handleCheckStatus}>
-        <TodoCheckbox checkStatus={item.status}></TodoCheckbox>
+        <TodoCheckbox checkStatus={item.status} />
       </Icons>
       <Content
         onClick={() => onContentClick(item.id)}
@@ -36,13 +41,6 @@ function TodoItem({ item, updateTodoItemStatus, onContentClick }) {
       </Content>
     </Item>
   );
-}
-
-TodoItem.propTypes = {
-  item: PropTypes.shape({
-    content: PropTypes.string.isRequired,
-    status: PropTypes.string.isRequired,
-    id: PropTypes.string.isRequired,
-  }),
 };
-export default memo(TodoItem);
+
+export default TodoItem;
