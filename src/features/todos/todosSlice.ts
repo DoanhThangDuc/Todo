@@ -1,17 +1,20 @@
 import { createSlice, nanoid, PayloadAction } from "@reduxjs/toolkit";
-import { TodoItemModel, Status } from "../../App";
+import { TodoItemModel, Status, State } from "../../App";
 
 export const todosSlice = createSlice({
   name: "todoItems",
   initialState: [] as TodoItemModel[],
   reducers: {
     addTodoItem: {
-      reducer: (state, action: PayloadAction<TodoItemModel>) => {
+      reducer: (
+        state: TodoItemModel[],
+        action: PayloadAction<TodoItemModel>
+      ) => {
         const newItem = action.payload;
         return [...state, { ...newItem }];
       },
       prepare(content: string) {
-        const id = nanoid()
+        const id = nanoid();
         return {
           payload: {
             content: content,
@@ -23,7 +26,10 @@ export const todosSlice = createSlice({
       },
     },
 
-    setTodoItemStatus(state, action) {
+    setTodoItemStatus(
+      state: TodoItemModel[],
+      action: { payload: { itemId: string; itemStatus: Status } }
+    ) {
       const updatedItemStatus = state.map((item) =>
         item.id === action.payload.itemId
           ? { ...item, status: action.payload.itemStatus }
@@ -32,7 +38,7 @@ export const todosSlice = createSlice({
       return [...updatedItemStatus];
     },
 
-    setStrikeThrough(state, action) {
+    setStrikeThrough(state: TodoItemModel[], action: PayloadAction<string>) {
       const todoItem = state.find((item) => item.id === action.payload);
       if (!todoItem) return state;
       if (todoItem.strikeThrough) {
@@ -50,10 +56,7 @@ export const todosSlice = createSlice({
   },
 });
 
-export const {
-  addTodoItem,
-  setTodoItemStatus,
-  setStrikeThrough,
-} = todosSlice.actions;
-
+export const { addTodoItem, setTodoItemStatus, setStrikeThrough } =
+  todosSlice.actions;
+export type TodoActionTypes = typeof todosSlice.actions
 export default todosSlice.reducer;

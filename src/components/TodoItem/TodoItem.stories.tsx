@@ -1,4 +1,5 @@
 import React from "react";
+import { Action } from "redux";
 import { Meta, Story } from "@storybook/react";
 import TodoItem from "./TodoItem";
 import { TodoItemModel, Status } from "../../App";
@@ -10,8 +11,14 @@ export default {
 
 const Template: Story<{
   item: TodoItemModel;
-  setTodoItemStatus: ({itemId,itemStatus}: {itemId: string,itemStatus: Status}) => void;
-  onContentClick: (id: string) => void;
+  setTodoItemStatus: ({
+    itemId,
+    itemStatus,
+  }: {
+    itemId: string;
+    itemStatus: Status;
+  }) => Action;
+  onContentClick: (id: string) => Action;
 }> = (args) => <TodoItem {...args} />;
 
 export const Default = Template.bind({});

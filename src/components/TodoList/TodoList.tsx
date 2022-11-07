@@ -2,7 +2,6 @@ import React from "react";
 import TodoItem from "../TodoItem/TodoItem";
 import InputSection from "../InputSection/InputSection";
 import { TodoBoardProps } from "../Todo/TodoBoard";
-
 import {
   StyledTodoList,
   TodoContainer,

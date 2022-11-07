@@ -1,16 +1,17 @@
-import { configureStore } from '@reduxjs/toolkit'
+import { configureStore } from "@reduxjs/toolkit";
 
-import todosReducer from './features/todos/todosSlice'
-import filtersReducer from './features/filters/filtersSlice'
+import todosReducer, { TodoActionTypes } from "./features/todos/todosSlice";
+import filtersReducer, {
+  
+} from "./features/filters/filtersSlice";
 
 const store = configureStore({
   reducer: {
     todoItems: todosReducer,
-    filter: filtersReducer
-  }
-})
+    filter: filtersReducer,
+  },
+});
 
+export type AppDispatch = typeof store.dispatch;
 export type RootState = ReturnType<typeof store.getState>
-export type AppDispatch = typeof store.dispatch
-
-export default store
+export default store;

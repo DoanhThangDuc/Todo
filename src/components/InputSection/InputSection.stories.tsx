@@ -1,14 +1,15 @@
 import React from "react";
+import { Action } from "redux";
 import { Meta, Story } from "@storybook/react";
 import InputSection from "./InputSection";
-import { TodoItemModel } from "../../App";
+
 export default {
   component: InputSection,
   title: "Input Section",
 } as Meta;
 
 const Template: Story<{
-  onSubmitTodoContent: (todoInput: string) => TodoItemModel;
+  onSubmitTodoContent: (todoInput: string) => Action;
   initialInput: string;
 }> = (args) => <InputSection {...args} />;
 

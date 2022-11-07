@@ -1,4 +1,5 @@
 import React from "react";
+import { Action, Dispatch } from "redux";
 import { connect } from "react-redux";
 import TodoBoard from "../components/Todo/TodoBoard";
 import {
@@ -11,13 +12,12 @@ import { selectTodoItemsByStatus } from "../selector";
 import { State, Status } from "../App";
 
 const mapStateToProps = (state: State) => ({ state: state });
-
 function TodoBoardContainer({
   state,
   dispatch,
 }: {
   state: State;
-  dispatch: any;
+  dispatch: Dispatch<Action>;
 }) {
   return (
     <TodoBoard

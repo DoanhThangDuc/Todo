@@ -1,8 +1,8 @@
 import { createSelector } from "reselect";
 import {State, TodoItemModel} from './App'
 
-const selectFilterStatus = (state: State) => state.filter;
-const selectAllTodoItems = (state: State) => state.todoItems;
+export const selectFilterStatus = (state: State) => state.filter;
+export const selectAllTodoItems = (state: State) => state.todoItems;
 
 export const selectTodoItemsByStatus = createSelector(
   [selectAllTodoItems, selectFilterStatus],
