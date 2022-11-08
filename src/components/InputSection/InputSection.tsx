@@ -1,11 +1,9 @@
 import React, { useRef, useState } from "react";
-import { Action } from "redux";
 import { StyledInputSection, MonitorBtn } from "./InputSection.styled";
-import { TodoItemModel } from "../../App";
 
 const InputSection: React.FC<{
   initialInput: string;
-  onSubmitTodoContent: (todoInput: string) => Action;
+  onSubmitTodoContent: (todoInput: string) => void;
 }> = ({ onSubmitTodoContent, initialInput }) => {
   const [todoInput, setTodoInput] = useState(initialInput);
   const inputRef = useRef<HTMLInputElement | null>(null);

@@ -1,5 +1,4 @@
 import React from "react";
-import { Action } from "redux";
 import TodoList from "../TodoList/TodoList";
 import Logo from "../Logo/Logo";
 import { StyledTodo } from "./TodoBoard.styled";
@@ -7,16 +6,16 @@ import { TodoItemModel, Status } from "../../App";
 
 export interface TodoBoardProps {
   todoItems: TodoItemModel[];
-  onSubmitTodoContent: (todoInput: string) => Action;
+  onSubmitTodoContent: (todoInput: string) => void;
   setTodoItemStatus: ({
     itemId,
     itemStatus,
   }: {
     itemId: string;
     itemStatus: Status;
-  }) => Action;
-  setStrikeThrough: (id: string) => Action;
-  onClickFilter: (filter: Status) => Action;
+  }) => void;
+  setStrikeThrough: (id: string) => void;
+  onClickFilter: (filter: Status) => void;
 }
 
 const TodoBoard: React.FC<TodoBoardProps> = ({

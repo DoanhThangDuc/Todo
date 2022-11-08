@@ -1,5 +1,4 @@
 import React from "react";
-import { Action } from "redux";
 import { Item, Icons, Content } from "./TodoItem.styled";
 import TodoCheckbox from "../TodoCheckbox/TodoCheckbox";
 import { TodoItemModel } from "../../App";
@@ -13,8 +12,8 @@ const TodoItem: React.FC<{
   }: {
     itemId: string;
     itemStatus: Status;
-  }) => Action;
-  onContentClick: (id: string) => Action;
+  }) => void;
+  onContentClick: (id: string) => void;
 }> = ({ item, setTodoItemStatus, onContentClick }) => {
   const handleCheckStatus = () => {
     let itemStatus: Status;
