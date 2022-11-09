@@ -1,6 +1,7 @@
 import GlobalStyles from "./shared/Global.styled";
 import { ThemeProvider } from "styled-components";
 import TodoBoardContainer from "./container/TodoBoardContainer";
+
 export const theme = {
   colors: {
     header: "#edfbff",
@@ -11,13 +12,27 @@ export const theme = {
   tablet: "63.9375em",
 };
 
-function App() {
+export type Status = "unchecked" | "checked" | "crossed";
+
+export interface TodoItemModel {
+  content: string;
+  status: Status;
+  id: string;
+  strikeThrough: boolean;
+}
+
+export interface State {
+  todoItems: TodoItemModel[];
+  filter: Status;
+}
+
+const App: React.FC = () => {
   return (
     <ThemeProvider theme={theme}>
-      <GlobalStyles></GlobalStyles>
-      <TodoBoardContainer></TodoBoardContainer>;
+      <GlobalStyles />
+      <TodoBoardContainer />
     </ThemeProvider>
   );
-}
+};
 
 export default App;
