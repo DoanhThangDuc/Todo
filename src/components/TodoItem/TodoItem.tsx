@@ -1,11 +1,25 @@
 import { observer } from "mobx-react-lite";
 import { Item, Icons, Content } from "./TodoItem.styled";
 import TodoCheckbox from "../TodoCheckbox/TodoCheckbox";
-import PropTypes from "prop-types";
+import { TodoItemModal, Status } from "../../store";
 
-function TodoItem({ item, updateTodoItemStatus, onContentClick }) {
+function TodoItem({
+  item,
+  updateTodoItemStatus,
+  handleUpdateStrikeThrough,
+}: {
+  item: TodoItemModal;
+  updateTodoItemStatus: ({
+    itemId,
+    itemStatus,
+  }: {
+    itemId: string;
+    itemStatus: Status;
+  }) => void;
+  handleUpdateStrikeThrough: (id: string) => void;
+}) {
   const handleCheckStatus = () => {
-    let itemStatus;
+    let itemStatus: Status;
     switch (item.status) {
       case "unchecked":
         itemStatus = "checked";
@@ -30,7 +44,7 @@ function TodoItem({ item, updateTodoItemStatus, onContentClick }) {
         <TodoCheckbox checkStatus={item.status}></TodoCheckbox>
       </Icons>
       <Content
-        onClick={() => onContentClick(item.id)}
+        onClick={() => handleUpdateStrikeThrough(item.id)}
         lineThrough={item.strikeThrough}
       >
         {item.content}
@@ -39,11 +53,4 @@ function TodoItem({ item, updateTodoItemStatus, onContentClick }) {
   );
 }
 
-TodoItem.propTypes = {
-  item: PropTypes.shape({
-    content: PropTypes.string.isRequired,
-    status: PropTypes.string.isRequired,
-    id: PropTypes.string.isRequired,
-  }),
-};
 export default observer(TodoItem);

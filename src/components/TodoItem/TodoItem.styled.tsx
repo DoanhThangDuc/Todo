@@ -11,19 +11,19 @@ export const Item = styled.li`
   font-size: 1.5rem;
 `;
 
-const strikeThrough = `
-  font-style: italic;
+const strikeThrough = css`
   color: #7e7171;
   text-decoration: line-through;
+  font-style: italic;
 `;
-export const Content = styled.p`
-  background-color: ${(props) => props.background || "inherit"};
-  ${(props) =>
-    props.lineThrough
-      ? css`
-          ${strikeThrough}
-        `
-      : ""}
+export const Content = styled.p<{ lineThrough: boolean }>`
+  background-color: "inherit"
+    ${(props) =>
+      props.lineThrough
+        ? css`
+            ${strikeThrough}
+          `
+        : ""};
   padding-left: 50px;
   transform: translateY(-25%);
   cursor: pointer;

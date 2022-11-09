@@ -1,12 +1,16 @@
 import React from "react";
 import TodoCheckbox from "./TodoCheckbox";
+import { Meta, Story } from "@storybook/react";
+import { Status } from "../../store";
 
 export default {
   component: TodoCheckbox,
   title: "Todo Checkbox",
-};
+} as Meta;
 
-const Template = (args) => <TodoCheckbox {...args}></TodoCheckbox>;
+const Template: Story<{ checkStatus: Status }> = (args) => (
+  <TodoCheckbox {...args} />
+);
 
 export const Default = Template.bind({});
 Default.args = {
