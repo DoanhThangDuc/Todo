@@ -1,4 +1,5 @@
 import React from "react";
+import { Action } from "redux";
 import { Meta, Story } from "@storybook/react";
 import InputSection from "./InputSection";
 
@@ -8,7 +9,7 @@ export default {
 } as Meta;
 
 const Template: Story<{
-  onSubmitTodoContent: (todoInput: string) => void;
+  onSubmitTodoContent: (todoInput: string) => Action;
   initialInput: string;
 }> = (args) => <InputSection {...args} />;
 

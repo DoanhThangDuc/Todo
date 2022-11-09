@@ -2,7 +2,6 @@ import React from "react";
 import TodoItem from "../TodoItem/TodoItem";
 import InputSection from "../InputSection/InputSection";
 import { TodoBoardProps } from "../Todo/TodoBoard";
-
 import {
   StyledTodoList,
   TodoContainer,
@@ -15,8 +14,8 @@ import { TodoItemModel } from "../../App";
 const TodoList: React.FC<TodoBoardProps> = ({
   todoItems = [],
   onSubmitTodoContent,
-  updateTodoItemStatus,
-  handleUpdateStrikeThrough,
+  setTodoItemStatus,
+  setStrikeThrough,
   onClickFilter,
 }) => {
   return (
@@ -29,13 +28,14 @@ const TodoList: React.FC<TodoBoardProps> = ({
               <TodoItem
                 key={item.id}
                 item={item}
-                updateTodoItemStatus={updateTodoItemStatus}
-                onContentClick={handleUpdateStrikeThrough}
+                setTodoItemStatus={setTodoItemStatus}
+                onContentClick={setStrikeThrough}
               />
             );
           })}
         </TodoContainer>
         <InputSection
+          initialInput=""
           onSubmitTodoContent={onSubmitTodoContent}
         />
         <StyleFilterPanel>

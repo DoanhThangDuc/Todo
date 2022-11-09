@@ -6,18 +6,23 @@ import { TodoItemModel, Status } from "../../App";
 
 export interface TodoBoardProps {
   todoItems: TodoItemModel[];
-  filterTodoItems: (status: Status) => void;
   onSubmitTodoContent: (todoInput: string) => void;
-  updateTodoItemStatus: (id: string, checkStatus: Status) => void;
-  handleUpdateStrikeThrough: (id: string) => void;
+  setTodoItemStatus: ({
+    itemId,
+    itemStatus,
+  }: {
+    itemId: string;
+    itemStatus: Status;
+  }) => void;
+  setStrikeThrough: (id: string) => void;
   onClickFilter: (filter: Status) => void;
 }
+
 const TodoBoard: React.FC<TodoBoardProps> = ({
   todoItems,
-  filterTodoItems,
   onSubmitTodoContent,
-  updateTodoItemStatus,
-  handleUpdateStrikeThrough,
+  setTodoItemStatus,
+  setStrikeThrough,
   onClickFilter,
 }) => {
   return (
@@ -25,10 +30,9 @@ const TodoBoard: React.FC<TodoBoardProps> = ({
       <Logo />
       <TodoList
         todoItems={todoItems}
-        filterTodoItems={filterTodoItems}
         onSubmitTodoContent={onSubmitTodoContent}
-        updateTodoItemStatus={updateTodoItemStatus}
-        handleUpdateStrikeThrough={handleUpdateStrikeThrough}
+        setTodoItemStatus={setTodoItemStatus}
+        setStrikeThrough={setStrikeThrough}
         onClickFilter={onClickFilter}
       />
     </StyledTodo>

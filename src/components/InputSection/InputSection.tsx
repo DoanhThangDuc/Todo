@@ -2,9 +2,10 @@ import React, { useRef, useState } from "react";
 import { StyledInputSection, MonitorBtn } from "./InputSection.styled";
 
 const InputSection: React.FC<{
+  initialInput: string;
   onSubmitTodoContent: (todoInput: string) => void;
-}> = ({ onSubmitTodoContent }) => {
-  const [todoInput, setTodoInput] = useState("");
+}> = ({ onSubmitTodoContent, initialInput }) => {
+  const [todoInput, setTodoInput] = useState(initialInput);
   const inputRef = useRef<HTMLInputElement | null>(null);
 
   const handleFormSubmit: React.FormEventHandler = (e: React.ChangeEvent) => {

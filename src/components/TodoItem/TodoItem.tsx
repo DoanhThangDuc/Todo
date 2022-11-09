@@ -6,9 +6,15 @@ import { Status } from "../../App";
 
 const TodoItem: React.FC<{
   item: TodoItemModel;
-  updateTodoItemStatus: (id: string, status: Status) => void;
+  setTodoItemStatus: ({
+    itemId,
+    itemStatus,
+  }: {
+    itemId: string;
+    itemStatus: Status;
+  }) => void;
   onContentClick: (id: string) => void;
-}> = ({ item, updateTodoItemStatus, onContentClick }) => {
+}> = ({ item, setTodoItemStatus, onContentClick }) => {
   const handleCheckStatus = () => {
     let itemStatus: Status;
     switch (item.status) {
@@ -25,7 +31,8 @@ const TodoItem: React.FC<{
         itemStatus = "unchecked";
         break;
     }
-    updateTodoItemStatus(item.id, itemStatus);
+    const itemId = item.id;
+    setTodoItemStatus({ itemId, itemStatus });
   };
 
   return (
